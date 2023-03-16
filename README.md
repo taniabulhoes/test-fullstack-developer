@@ -9,7 +9,6 @@
 - NodeJS
 - SQL Database (Postgres, Mysql, MariaDB)
 - Utilizar Typescript
-- Banco de dados SQL (MongoDB, Firebase, Realm, etc)
 - Arquitetura MVC para a API
 - Repositório Github
 - Instruções no README.md do repositório para rodar a aplicação de forma local
