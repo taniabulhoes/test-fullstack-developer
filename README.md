@@ -15,7 +15,7 @@
 
 ## Como participar?
 1. Faça um fork deste repositório (https://docs.github.com/en/get-started/quickstart/fork-a-repo)
-4. Após finalizar a prova, crie um Pull Request do fork para a `main` deste reposotório, para ser analisado por nós. :D (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork)
+4. Após finalizar a prova, crie um Pull Request do fork para a `main` deste repositório, para ser analisado por nós. :D (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork)
 5. Na descrição do PR, deixe qualquer diretiva necessária para rodar o projeto (Comandos para rodar a aplicação, testes, etc), bem como dependências (banco de dados, etc) localmente.
 6. Caso tenha dificuldades com qualquer etapa deste processo, nos acione que ficaremos felizes em lhe ajudar (contatos descritos no final deste página)
 
