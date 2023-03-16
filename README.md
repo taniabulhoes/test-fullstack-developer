@@ -1,8 +1,8 @@
 [![Tania Bulhoes Logo](https://images.squarespace-cdn.com/content/v1/625f0af3cbf96235f8de8b4a/539097a0-548d-4a84-a5fa-6cbbad1964a0/Tania_bulhoes_Logo_Horizontal_Positivo_RGB.png?format=1500w)](https://tbi.taniabulhoes.com.br/)
 
->- Todos os interessados que fizerem Pull Request receberão um feedback da Tania Bulhões.<br>
->- Essa prova consiste em testar seus conhecimentos em desenvolvimento de fullstack web applications.
->- Estamos priorizando desenvolvedores com proficiência na stack NodeJS + React, portanto no momento não avaliaremos PRs em que o Dev entregue uma solução que utiliza uma stack diferente para desenvolvê-la.
+>- Todos os interessados que fizerem Pull Request (a partir de um fork deste repositório) receberão um feedback da Tania Bulhões.
+>- Essa prova consiste em testar seus conhecimentos em desenvolvimento de fullstack web applications
+>- Estamos priorizando desenvolvedores com experiência na stack NodeJS + React, portanto no momento não avaliaremos PRs em que o Dev entregue uma solução que utiliza uma stack diferente para desenvolvê-la.
 
 ### Requisitos
 - [React](https://reactjs.org/docs/getting-started.html)
@@ -14,11 +14,10 @@
 - Instruções no README.md do repositório para rodar a aplicação de forma local
 
 ## Como participar?
-1. Clone este repositório
-2. Crie uma branch com o seguinte padrão de nomeclatura `devtest-{seu_primeiro_nome}-{seu_sobrenome}`. (Ex:. `devtest-fulado-detal`)
-3. Durante seu seu desenvolvimento, vá realizando commits nessa sua nova branch
-4. Após finalizar a prova, crie um Pull Request da sua branch para a `main` para ser analisado por nós. :D
+1. Faça um fork deste repositório (https://docs.github.com/en/get-started/quickstart/fork-a-repo)
+4. Após finalizar a prova, crie um Pull Request do fork para a `main` deste reposotório, para ser analisado por nós. :D (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork)
 5. Na descrição do PR, deixe qualquer diretiva necessária para rodar o projeto (Comandos para rodar a aplicação, testes, etc), bem como dependências (banco de dados, etc) localmente.
+6. Caso tenha dificuldades com qualquer etapa deste processo, nos acione que ficaremos felizes em lhe ajudar (contatos descritos no final deste página)
 
 ## Detalhes da prova
 A prova consiste em criar uma aplicação web simples de **To Do List (Lista de tarefas)**.
