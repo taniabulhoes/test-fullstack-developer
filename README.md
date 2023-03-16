@@ -56,9 +56,7 @@ Deve conter no app as seguintes funcionalidades:
 8. OAuth via JWT token no fluxo de login do usuário
 9. Autenticação JWT token em todos os endpoints privados da API
 
-*Obs.: Não é obrigatório criar página de cadastro de usuário, mas caso seja feito, será considerado um diferencial*
-
-*Obs2.: Sinta-se livre para implementar o estilo visual que preferir, utilizando qualquer framework css de sua preferência (styles-components, ant, material, bootstrap, etc). Avaliaremos apenas se a experiência de navegação do usuário está simples, objetiva e fluida*
+*Obs.: Sinta-se livre para implementar o estilo visual que preferir, utilizando qualquer framework css de sua preferência (styles-components, ant, material, bootstrap, etc). Avaliaremos apenas se a experiência de navegação do usuário está simples, objetiva e fluida*
 
 ### Desejáveis
 - Utilizar [NextJS](https://nextjs.org/) para o desenvolvimeto do frontend da aplicação
