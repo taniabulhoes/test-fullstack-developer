@@ -47,7 +47,7 @@ O software deve ser dividido em 3 camadas isoladas:
 >**- Frontend:**
  > - Deve se comunicar com o backend através da API desenvolvida e entregar a experiência do software ao usuário.
 
-A aplicação deve conter no mínimo 4 telas, sendo 3 delas privadas e 1 pública. Sendo elas 
+A aplicação deve conter no mínimo 4 telas, sendo 3 delas privadas e 1 pública. Sendo elas:
   - Tela de Login **(Pública)**
   - Tela de Listagem de Tarefas **(Privada)**
     - Nesta tela devemos ser capazes de excluir uma tarefa
@@ -55,10 +55,9 @@ A aplicação deve conter no mínimo 4 telas, sendo 3 delas privadas e 1 públic
   - Tela de Ediçao de uma Nova Tarefa **(Privada)**
     - Nesta tela devemos ser capazes de excluir uma tarefa
 
-Diretivas importantes:
-> Todos os dados devem ser salvos em um banco de dados relacional de sua escolha.
-> As telas privadas só podem ser acessadas na aplicação após login
-> **Um build, resultando em uma apk (instalador) para Android deve ser gerado e a aplicação deverá rodar sem erros em um device real para fins de testes.** <br>
+### Diretivas importantes:
+- Todos os dados devem ser salvos em um banco de dados relacional de sua escolha.
+- As telas privadas só podem ser acessadas na aplicação após login.
 
 ### Funcionalidades
 Deve conter no app as seguintes funcionalidades:
