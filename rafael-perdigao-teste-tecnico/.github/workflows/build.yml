@@ -1,0 +1,57 @@
+name: project-pipeline
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  #                           Sonarcloud não vai funcionar em um repositorio de terceiros
+  # sonarcloud:
+  #   name: SonarCloud
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         fetch-depth: 0 
+  #     - name: SonarCloud Scan
+  #       uses: SonarSource/sonarcloud-github-action@master
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  
+  eslint:
+    name: Eslint
+    runs-on: ubuntu-latest
+    steps:
+        - name: Verificando o repositório do Github
+          uses: actions/checkout@v2
+
+        - name: Instalando o node com a versão 16
+          uses: actions/setup-node@v1
+          with:
+            node-version: 16
+
+        - name: instalando as dependências de package.json
+          run: npm install
+
+        - name: executando o lint para verificação de erros
+          run: npm run lint 
+
+  # cypress:
+  #   name: Cypress Tests
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #       - name: Verificando o repositório do Github
+  #         uses: actions/checkout@v3
+
+  #       - name: Instalando as dependências de package.json
+  #         run: npm install
+
+  #       - name: Iniciando cypress em Github Actions
+  #         uses: cypress-io/github-action@v5
+  #         with:
+  #           start: npm run start --verbose
+  #           run: npm run build
+  #           wait-on: 'http://localhost:3000'
+  #           env: DATABASE_URL=${{ secrets.DATABASE_URL }},DATABASE_URL_TOKEN_SECRET=BestTodoList
