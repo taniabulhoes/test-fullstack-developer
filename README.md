@@ -43,7 +43,7 @@ https://drive.google.com/file/d/1u0OgJf9MJqPvBDpzWtHiAlpBw1bUUoWQ/view?usp=shari
 `yarn`
 
 ### Run the application
-``yarn dev
+`yarn dev`
 
 ---
 
