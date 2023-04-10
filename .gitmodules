@@ -1,0 +1,3 @@
+[submodule "nextjs-fullstack-to-do-list"]
+	path = nextjs-fullstack-to-do-list
+	url = git@github.com:rafaelPermec/nextjs-fullstack-to-do-list.git
