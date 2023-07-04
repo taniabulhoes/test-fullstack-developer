@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: db
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=caue
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=db_fullstack_test
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U caue -d db_fullstack_test"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+  backend:
+    stdin_open: true
+    container_name: backend
+    depends_on:
+      - db
+    build: ./backend
+    environment:
+      - PORT=4000
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./backend:/app
+      - /backend/node_modules
+  # frontend:
+  #   container_name: frontend
+  #   build: ./frontend
+  #   ports:
+  #     - "3000:3000"
