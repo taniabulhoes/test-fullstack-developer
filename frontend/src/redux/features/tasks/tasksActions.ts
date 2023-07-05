@@ -109,9 +109,6 @@ export const updateTask = createAsyncThunk(
                 config
             )
 
-            console.log(taskList);
-
-
             return taskList.data
         } catch (error) {
             const err = error as any
