@@ -36,7 +36,6 @@ const taskSlice = createSlice({
         builder.addCase(createTask.fulfilled, (state, { payload }) => {
             state.loading = false
             state.success = true
-            console.log(payload);
 
         })
         builder.addCase(createTask.rejected, (state, { payload }) => {

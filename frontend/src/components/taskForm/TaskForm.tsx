@@ -4,14 +4,12 @@ import { FormContainer } from "./taskForm.styles"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/navigation"
-import { registerUser } from "@/redux/features/users/usersActions"
-import { IUserRequest } from "@/interfaces/IUser"
 import { AppDispatch, RootState } from "@/redux/store/store"
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai"
 import { toast } from "react-toastify"
 import { useState } from "react"
 import { ITaskRequest } from "@/interfaces/ITask"
 import { createTask } from "@/redux/features/tasks/tasksActions"
+import { APP_ROUTES } from "@/constants/routes"
 
 
 type FormValues = {
@@ -22,7 +20,7 @@ type FormValues = {
 }
 
 const TaskForm = () => {
-  const { register, handleSubmit } = useForm<FormValues>();
+  const { register, handleSubmit, watch, formState:{ errors } } = useForm<FormValues>();
 
   const task = useSelector((state: RootState) => state.task)
   const dispatch = useDispatch<AppDispatch>()
@@ -30,7 +28,7 @@ const TaskForm = () => {
 
 
   const [step, SetStep] = useState(1)
-  const [title, SetTitle] = useState("")
+  const [title, setTitle] = useState("")
   const [showError, SetShowError] = useState(false)
 
   const nextStep = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -47,8 +45,14 @@ const TaskForm = () => {
     SetStep(1)
   }
 
+  const handleBackButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault()
+      push("/")
+  }
+
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    SetTitle(e.target.value)
+    setTitle(e.target.value)
   }
 
 
@@ -79,27 +83,25 @@ const TaskForm = () => {
                   <div className="formStep">
                     <h2>Vamos lá, primeiro digite o título da tarefa.</h2>              
                     <div className="inputContainer">
-                      <input placeholder="Minha tarefa*" {...register("title", {
-                        onChange: (e) =>{
-                          handleChange(e)
-                        }
-                      })} name="title"/>
+                      <input placeholder="Minha tarefa*" {...register("title", {required: "Campo obrigatório", minLength: { value: 6, message: "Deve conter ao 6 caracteres"}, onChange: (e) => {handleChange(e)}})} name="title"/>
+                      {showError && <p>Mínimo 6 caracteres</p>}
                     </div>
-                    { showError  &&
-                      <div className="erroContainer">
-                        <span>Não esqueça que o título deve ter ao menos 6 caracteres</span>
-                      </div>
-                    }
-                    <button className="stepCrontrol left" onClick={(e) => nextStep(e)}>
-                      Continuar
-                    </button>
+                    <div className="actions">
+                      <button className="stepCrontrol left" onClick={(e) => handleBackButton(e)}>
+                        Voltar
+                      </button>
+                      <button className="stepCrontrol left" onClick={(e) => nextStep(e)}>
+                        Continuar
+                      </button>
+                    </div>
                   </div>               
                   }
                   {step == 2 && 
                     <div className="formStep">
                       <h2>Agora a descrição e status</h2>              
                       <div className="inputContainer">
-                        <textarea maxLength={300} placeholder="Descrição" {...register("description")} name="description"/>
+                        <textarea maxLength={300} placeholder="Descrição" {...register("description", {required: "Campo obrigatório", maxLength: { value: 30, message: "Tamanho máximo 300"}})} name="description"/>
+                        {errors.description && <p>{errors.description.message}</p>}
                       </div>
                       <div className="radioOptions" >
                         <input {...register("status")} checked type="radio" id="open" name="status" value="open"/>

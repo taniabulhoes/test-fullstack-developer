@@ -1,7 +1,7 @@
 'use client'
 import { checkIsPublicRoute } from '@/helpers/checkIsPublic';
 import { usePathname, useRouter } from 'next/navigation';
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useEffect } from 'react'
 import { PrivateRoute } from '../privateRoute/PrivateRoute';
 import { checkIsAuthenticated } from '@/helpers/checkUserIsAuthenticated';
 import { setUserToken } from '@/redux/features/tasks/task';

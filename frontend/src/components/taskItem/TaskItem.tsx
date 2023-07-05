@@ -8,7 +8,7 @@ import { MdOutlineEditNote, MdOutlineNotStarted } from "react-icons/md";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store/store";
-import { deleteTask, getAllTasks, updateTask } from "@/redux/features/tasks/tasksActions";
+import { deleteTask, updateTask } from "@/redux/features/tasks/tasksActions";
 import Modal from "../modal/Modal";
 import { SubmitHandler, useForm } from "react-hook-form";
 

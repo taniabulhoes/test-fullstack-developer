@@ -8,7 +8,7 @@ import { registerUser } from "@/redux/features/users/usersActions"
 import { IUserRequest } from "@/interfaces/IUser"
 import { AppDispatch, RootState } from "@/redux/store/store"
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai"
-import { ToastContainer, toast } from "react-toastify"
+import { toast } from "react-toastify"
 import { useState } from "react"
 
 type FormValues = {
@@ -20,7 +20,7 @@ type FormValues = {
 
 
 const RegisterForm = () => {
-  const { register, handleSubmit } = useForm<FormValues>();
+  const { register, handleSubmit, watch, formState:{ errors } } = useForm<FormValues>();
   const dispatch = useDispatch<AppDispatch>()
   const router = useRouter()
 
@@ -56,21 +56,34 @@ const RegisterForm = () => {
 
   return (
              <FormContainer>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSubmit)} noValidate>
                   <h1>Cadastrar</h1>
                   <h2>Crie a sua conta e aproveite nossos serviços.</h2>
                   <div className="inputContainer">
-                    <input placeholder="Nome*" {...register("name")} name="name"/> 
+                    <input placeholder="Nome*" {...register("name", {required: "Campo obrigatório"})} name="name"/> 
+                    {errors.name && <p>{errors.name.message}</p>}
                   </div>                 
                   <div className="inputContainer">
-                    <input placeholder="seuemail@email.com*" {...register("email")} name="email"/>
+                    <input placeholder="seuemail@email.com*" {...register("email", {pattern: { 
+                        value: new RegExp("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"),
+                        message: "Email em formato inválido"
+                       }, required: "Campo obrigatório"})} name="email"/>
+                    {errors.email && <p>{errors.email.message}</p>}
                   </div>
                   <div className="inputContainer">
-                    <input placeholder="Senha*" type={showPassword} {...register("password")} name="password"/>
-                    {showPassword == "password" ? <AiFillEyeInvisible onClick={()=> handleShowPassword()} /> : <AiFillEye onClick={()=> handleShowPassword()}/>}                
+                    <input placeholder="Senha*" type={showPassword} {...register("password", {required: "Campo obrigatório", minLength: {value: 6, message: "Deve conter ao 6 caracteres"}})} name="password"/>
+                    {showPassword == "password" ? <AiFillEyeInvisible onClick={()=> handleShowPassword()} /> : <AiFillEye onClick={()=> handleShowPassword()}/>} 
+                    {errors.password && <p>{errors.password.message}</p>}
                   </div>
                   <div className="inputContainer">
-                    <input placeholder="Confirme a Senha*" type="password" {...register("passwordConfirm")} name="passwordConfirm"/>                 
+                    <input placeholder="Confirme a Senha*" type="password" {...register("passwordConfirm", {required: "Campo obrigatório",
+                        validate: (val: string) => {
+                          if(watch('password') != val){
+                            return "Senhas diferentes"
+                          }
+                        }
+                      })} name="passwordConfirm"/>    
+                    {errors.passwordConfirm && <p>{errors.passwordConfirm.message}</p>}
                   </div>
                   <button type="submit" disabled={user.loading}>
                     Criar Conta

@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IUserSliceinitialState } from "@/interfaces/IUser";
 import { loginUser } from "./loginActions";
 import { ILoginSliceinitialState } from "@/interfaces/ILogin";
 

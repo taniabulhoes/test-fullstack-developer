@@ -18,7 +18,7 @@ type FormValues = {
 
 
 const LoginForm = () => {
-  const { register, handleSubmit } = useForm<FormValues>();
+  const { register, handleSubmit, formState:{ errors } } = useForm<FormValues>();
   const dispatch = useDispatch<AppDispatch>()
   const router = useRouter()
 
@@ -56,11 +56,16 @@ const LoginForm = () => {
                   <h1>Login</h1>
                   <h2>Que bom que você voltou! Faça o login com seu e-mail e senha.</h2>
                   <div className="inputContainer">               
-                    <input placeholder="seuemail@email.com*" {...register("email")} name="email"/>
+                    <input placeholder="seuemail@email.com*" {...register("email", {pattern: { 
+                        value: new RegExp("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"),
+                        message: "Email em formato inválido"
+                       }, required: "Campo obrigatório"})} name="email"/>
+                      {errors.email && <p>{errors.email.message}</p>}
                   </div>
                   <div className="inputContainer">               
-                    <input type={showPassword} placeholder="Senha*" {...register("password")} name="password"/>                 
+                    <input type={showPassword} placeholder="Senha*" {...register("password",{required: "Campo obrigatório"})} name="password"/>                 
                      {showPassword == "password" ? <AiFillEyeInvisible onClick={()=> handleShowPassword()} /> : <AiFillEye onClick={()=> handleShowPassword()}/>}
+                     {errors.password && <p>{errors.password.message}</p>}
                   </div>
                   <button type="submit">
                     Entrar
