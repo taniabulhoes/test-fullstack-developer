@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
 import { userModel } from "../models/users.models.js";
 import { ErrorTypes } from "../errors/errorCatalog.js";
+import { config } from "../configs/configs.js";
 
 const ensureAuthMiddleware = async (request: Request, response: Response, next: NextFunction) => {
     const authHeader = request.headers.authorization
@@ -16,10 +17,11 @@ const ensureAuthMiddleware = async (request: Request, response: Response, next: 
         throw new Error(ErrorTypes.tokenNotFound)
     }
 
-    const secretKey = "jsonwebtoken"
+    const secretKey = config.JWT_KEY
 
     verify(token, secretKey, (err, decoded) => {
         if (!decoded) {
+
             throw new Error()
         }
         const { userId } = <any>decoded;
