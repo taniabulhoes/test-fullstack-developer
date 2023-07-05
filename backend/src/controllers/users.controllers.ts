@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { userService } from "../services/users.services.js";
 
 
-// Create a new user
 const createUser = async (req: Request, res: Response) => {
     const newUser = req.body
     newUser.active = 1
@@ -11,14 +10,12 @@ const createUser = async (req: Request, res: Response) => {
 
 }
 
-// Get all users
 const getAllUsers = async (req: Request, res: Response) => {
     const users = await userService.getAllUsers()
     res.status(200).json(users)
 
 };
 
-// Get a user by ID
 const getUserById = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id)
     const user = await userService.getUserById(id)
@@ -27,7 +24,6 @@ const getUserById = async (req: Request, res: Response) => {
 };
 
 
-// Update a user by ID
 const updateUserById = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id)
     const updates = req.body
@@ -36,7 +32,6 @@ const updateUserById = async (req: Request, res: Response) => {
 
 };
 
-// Delete a user by ID
 const deleteUserById = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id)
     await userService.deleteUserById(id)

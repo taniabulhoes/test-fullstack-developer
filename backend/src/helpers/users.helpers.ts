@@ -1,4 +1,4 @@
-import { IUser, IUserRequest, IUserResponse } from "../interfaces/IUser.js"
+import { IUser, IUserResponse } from "../interfaces/IUser.js"
 
 const formatUserResponse = (user: IUser): IUserResponse => {
     const formatedUser: IUserResponse = {

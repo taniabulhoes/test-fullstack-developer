@@ -3,7 +3,6 @@ import { IUser, IUserRequest } from "../interfaces/IUser.js";
 
 const prisma = new PrismaClient();
 
-// Create a new user
 const createUser = async (user: IUserRequest): Promise<IUser> => {
     const newUser = await prisma.users.create({
         data: {
@@ -17,7 +16,6 @@ const createUser = async (user: IUserRequest): Promise<IUser> => {
     return newUser;
 };
 
-// Get a user by ID
 const getUserById = async (id) => {
     const user = await prisma.users.findUnique({
         where: {
@@ -41,7 +39,6 @@ const getAllUsers = async () => {
 
     return users;
 };
-// Update a user by ID
 const updateUserById = async (id, updates): Promise<IUser> => {
     const updatedUser = await prisma.users.update({
         where: {
@@ -52,7 +49,6 @@ const updateUserById = async (id, updates): Promise<IUser> => {
     return updatedUser;
 };
 
-// Delete a user by ID
 const deleteUserById = async (id) => {
     const deletedUser = await prisma.users.update({
         where: {

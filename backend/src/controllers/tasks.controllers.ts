@@ -5,6 +5,7 @@ import { Status } from "../interfaces/ITask.js";
 const createTask = async (req: Request, res: Response) => {
     const newTask = req.body
     const { userId } = req.body
+
     newTask.status = newTask.status || Status.open
     const task = await taskService.createTask(newTask, userId)
     res.status(201).json(task)

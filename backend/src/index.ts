@@ -6,6 +6,7 @@ import taskRoutes from "./routes/tasks.routes.js"
 import { ensureAuthMiddleware } from './middlewares/ensureAuth.middleware.js';
 import { errorHandlerMiddleware } from './middlewares/error.middleware.js';
 import cors from "cors"
+import { config } from './configs/configs.js';
 
 const app = express();
 
@@ -19,6 +20,6 @@ app.use("/tasks", ensureAuthMiddleware, taskRoutes)
 
 app.use(errorHandlerMiddleware)
 
-app.listen(4000, () => {
-    console.log(`server running on port 4000`);
+app.listen(config.PORT, () => {
+    console.log(`server running on port ${config.PORT}`);
 });
