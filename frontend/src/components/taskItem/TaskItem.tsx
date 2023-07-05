@@ -11,6 +11,7 @@ import { AppDispatch } from "@/redux/store/store";
 import { deleteTask, updateTask } from "@/redux/features/tasks/tasksActions";
 import Modal from "../modal/Modal";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 type TaskItemProps = {
     taskItem: ITask
@@ -63,6 +64,7 @@ const TaskItem = ({ taskItem, userToken, setListDependency, listDependency }: Ta
     } 
     dispatch(deleteTask(req)).then(()=>{
       setShowDeleteModal(false)
+      toast.success("Tarefa Excluída")
       setListDependency(!listDependency)
     })
   } 
