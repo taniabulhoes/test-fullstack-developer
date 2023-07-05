@@ -30,6 +30,7 @@ export const FormContainer = styled.div`
     }
 
     .inputContainer{
+        position: relative;
         box-sizing: border-box;
         border-radius: 4px;
         border: 1px solid #4C696F;
@@ -74,6 +75,15 @@ export const FormContainer = styled.div`
                 cursor: pointer;
                 filter: brightness(60%);
             }
+        }
+
+        p{
+            color: #832600;
+            position: absolute;
+            right: 5px;
+            top: -1.5px;
+            z-index: 1;
+            font-size: 0.75em;
         }
     }
 
