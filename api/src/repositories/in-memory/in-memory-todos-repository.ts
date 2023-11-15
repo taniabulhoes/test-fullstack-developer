@@ -1,7 +1,7 @@
 import { randomUUID } from "crypto";
-import { CreateTodoInput, DeleteTodoInput, ITodoRepository, Todo, UpdateTodoInput } from "../i-todo-repository";
+import { CreateTodoInput, DeleteTodoInput, ITodosRepository, Todo, UpdateTodoInput } from "../i-todo-repository";
 
-class InMemoryTodosRepository implements ITodoRepository{
+class InMemoryTodosRepository implements ITodosRepository{
 
   public items: Todo[] = [] 
 

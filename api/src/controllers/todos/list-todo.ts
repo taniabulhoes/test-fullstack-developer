@@ -1,13 +1,9 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { TodoAlreadyExistsError } from "src/use-cases/errors/todo-already-exists";
-import { TodoPastDateError } from "src/use-cases/errors/todo-past-date";
-import { UserAlreadyExistsError } from "src/use-cases/errors/user-already-exists";
-import { makeCreateTodoUseCase } from "src/use-cases/factories/make-create-todo";
-import { makeCreateUserUseCase } from "src/use-cases/factories/make-create-user";
-import { makeListTodoUseCase } from "src/use-cases/factories/make-list-todo";
+import { makeListTodoUseCase } from "src/use-cases/factories/make-list-todo-use-case";
 import { z } from "zod";
 
 export async function listTodos(request: FastifyRequest, reply: FastifyReply){
+  await request.jwtVerify()
 
   const listTodosQuerySchema = z.object({
     q: z.string(),
@@ -21,7 +17,7 @@ export async function listTodos(request: FastifyRequest, reply: FastifyReply){
   const todo = await listUseCase.execute({
     query: q,
     page,
-    userId: '604150e2-5e79-48f6-a2d8-99c3823d909b'
+    userId: request.user.sub
   })
 
   return reply.status(201).send({
