@@ -26,7 +26,7 @@ export interface Todo{
 
 export interface ITodosRepository {
   findById(id: string): Promise<Todo | null>,
-  findBySubject(todo: string): Promise<Todo | null>
+  findBySubject(subject: string): Promise<Todo | null>
   list(userId: string, page: number, query?: string): Promise<Todo[]>
   create(data: CreateTodoInput): Promise<Todo>,
   update(data: UpdateTodoInput): Promise<Todo>

@@ -26,6 +26,7 @@ export async function authenticate(request: FastifyRequest, reply: FastifyReply)
       {
         sign: {
           sub: user.id,
+          expiresIn: '2m'
         },
       },
     )    
@@ -34,7 +35,7 @@ export async function authenticate(request: FastifyRequest, reply: FastifyReply)
       {
         sign: {
           sub: user.id,
-          expiresIn: env.EXPERES_IN_REFRESH_TOKEN,
+          expiresIn: '20m',
         },
       },
     )
