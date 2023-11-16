@@ -6,15 +6,12 @@ import { darkTheme } from "../styles/themes/dark";
 export default function App({ Component, pageProps }) {
   globalStyles()
 
-  const [isDarkMode, setIsDarkMode] = useState(() => false);
+  const [isDarkMode, setIsDarkMode] = useState(() => true);
 
   const mode = isDarkMode ? darkTheme : ''
 
   return (
     <Container className={mode}>
-      <Header>
-        sadasda
-      </Header>
       <Component {...pageProps} />
     </Container>    
   )
