@@ -4,7 +4,6 @@ import { makeDeleteTodoUseCase } from "src/use-cases/factories/make-delete-todo-
 import { z } from "zod";
 
 export async function deleteTodo(request: FastifyRequest, reply: FastifyReply){
-  await request.jwtVerify()
 
   const createTodoParamsSchema = z.object({
     id: z.string(),

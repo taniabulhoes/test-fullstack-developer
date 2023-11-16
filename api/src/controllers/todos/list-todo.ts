@@ -3,9 +3,6 @@ import { makeListTodoUseCase } from "src/use-cases/factories/make-list-todo-use-
 import { z } from "zod";
 
 export async function listTodos(request: FastifyRequest, reply: FastifyReply){
-  await request.jwtVerify()
-
-  console.log(request.jwtVerify())
 
   const listTodosQuerySchema = z.object({
     q: z.string(),

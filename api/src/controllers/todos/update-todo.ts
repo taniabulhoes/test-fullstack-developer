@@ -5,7 +5,6 @@ import { makeUpdateTodoUseCase } from "src/use-cases/factories/make-update-todo-
 import { z } from "zod";
 
 export async function updateTodo(request: FastifyRequest, reply: FastifyReply){
-  await request.jwtVerify()
 
   const createTodoBodySchema = z.object({
     subject: z.string(),
