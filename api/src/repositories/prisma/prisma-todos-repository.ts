@@ -23,7 +23,7 @@ class PrismaTodosRepository implements ITodosRepository {
   
   }
   
-  async list(userId: string, page: number, query?: string){
+  async list(userId: string, query?: string){
     console.log(query)
     const todos = await prisma.todo.findMany({
       where: {

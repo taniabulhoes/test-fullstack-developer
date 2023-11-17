@@ -15,7 +15,6 @@ describe('Suite Test List Todos', () => {
 
   it('Should be able to list a todos', async () => {
     const user = 'user-01'
-    const page = 2
 
     for (let i = 1; i < 12; i++) {
       await todoRepository.create({
@@ -26,11 +25,8 @@ describe('Suite Test List Todos', () => {
       })
     }
 
-    const todos = await sut.execute({userId: user, page, query: 'Todo'})
+    const todos = await sut.execute({userId: user, query: 'Todo 1'})
 
-    expect(todos).toHaveLength(1)
-    expect(todos).toEqual([
-      expect.objectContaining({ id: 'todo-11' }),
-    ])
+    expect(todos).toHaveLength(3)
   })
 })

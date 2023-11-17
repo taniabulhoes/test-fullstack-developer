@@ -25,7 +25,7 @@ class InMemoryTodosRepository implements ITodosRepository{
     return toDo
   }
 
-  async list(userId: string, page: number, query?: string){
+  async list(userId: string, query?: string){
     const todos = this.items
       .filter((item) => {
         if(query != undefined){
@@ -34,7 +34,6 @@ class InMemoryTodosRepository implements ITodosRepository{
           return item.user_id === userId
         }
       })
-      .slice((page - 1) * 10, page * 10)
 
     return todos  
   }

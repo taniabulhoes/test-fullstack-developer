@@ -6,16 +6,14 @@ export async function listTodos(request: FastifyRequest, reply: FastifyReply){
 
   const listTodosQuerySchema = z.object({
     q: z.string(),
-    page: z.coerce.number().min(1).default(1),
   })
 
-  const { q, page } = listTodosQuerySchema.parse(request.query)
+  const { q } = listTodosQuerySchema.parse(request.query)
 
   const listUseCase = makeListTodoUseCase()
 
   const todo = await listUseCase.execute({
     query: q,
-    page,
     userId: request.user.sub
   })
 
