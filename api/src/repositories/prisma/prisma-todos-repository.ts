@@ -68,14 +68,14 @@ class PrismaTodosRepository implements ITodosRepository {
     return null
   }
 
-  async concludeTask(id: string, userId: string){
+  async concludeTask(id: string, userId: string, check: number){
     await prisma.todo.update({
       where: {
         id: id,
         user_id: userId
       },
       data: {
-        checked: 1
+        checked: check
       }      
     })
 

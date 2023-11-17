@@ -13,7 +13,6 @@ class PrismaUsersRepository implements IUsersRepository {
   }
  
   async create(data: UserCreateInput){
-    console.log(data)
 
     const user = await prisma.user.create({
       data

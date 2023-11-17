@@ -21,7 +21,18 @@ class ConcludeTodoUseCase{
       throw new TodoNotExists()
     }
 
-    await this.todoRepository.concludeTask(id, user_id) 
+    let check: number = 0
+
+    if(toDoExists.checked === 1){
+      check = 0
+    }
+
+    if(toDoExists.checked === 0){
+      check = 1
+    }    
+
+
+    await this.todoRepository.concludeTask(id, user_id, check) 
 
     return 
   }

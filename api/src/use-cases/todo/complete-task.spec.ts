@@ -13,7 +13,7 @@ describe('Suite test complete task', () => {
     sut = new ConcludeTodoUseCase(todoRepository)
   })
 
-  it('Should be able to complete a task', async () => {
+  it('Should be able to conclude a task', async () => {
     const id = 'todo-01'
     const user_id = 'user-01'
 
@@ -22,6 +22,7 @@ describe('Suite test complete task', () => {
       subject: 'First Todo',
       expected_date: nextMonthDate(0, 1, 2024),
       user_id,
+      checked: 0
     })
 
     await sut.execute({id, user_id})
@@ -31,6 +32,27 @@ describe('Suite test complete task', () => {
     expect(list).toEqual([
       expect.objectContaining({ checked: 1 }),
     ])
-
   })
+
+  it('Should be able to unconclude a task', async () => {
+    const id = 'todo-01'
+    const user_id = 'user-01'
+
+    await todoRepository.create({
+      id,
+      subject: 'First Todo',
+      expected_date: nextMonthDate(0, 1, 2024),
+      user_id,
+      checked: 1
+    })
+
+    await sut.execute({id, user_id})
+
+    const list = await todoRepository.list(user_id)
+
+    expect(list).toEqual([
+      expect.objectContaining({ checked: 0 }),
+    ])
+
+  })  
 })

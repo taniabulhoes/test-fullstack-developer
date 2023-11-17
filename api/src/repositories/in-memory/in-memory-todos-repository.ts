@@ -45,7 +45,7 @@ class InMemoryTodosRepository implements ITodosRepository{
       subject: data.subject,
       expected_date: data.expected_date,
       user_id: data.user_id,
-      checked: 0
+      checked: data.checked
     }
 
     this.items.push(todo)
@@ -74,11 +74,11 @@ class InMemoryTodosRepository implements ITodosRepository{
     return null
   }
 
-  async concludeTask(id: string): Promise<null> {
+  async concludeTask(id: string, user_id: string, check: number): Promise<null> {
     const todoIndex = this.items.findIndex((item) => item.id === id)
 
     if(todoIndex >= 0){
-      this.items[todoIndex].checked = 1 
+      this.items[todoIndex].checked = check
     }    
 
     return null;
