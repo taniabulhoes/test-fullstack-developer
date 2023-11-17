@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
+import { useToast } from "../hooks/useToast";
 
 type Props = {
   className?: string;
@@ -13,16 +14,13 @@ type Props = {
 
 export default function Login(props: Props){
   const router = useRouter();
+  const {notifyMe} = useToast()
 
   const user = useRef("");
   const password = useRef("");
 
   const handleSigIn = async () => {
-    console.log(user)
 
-    if(!user.current || !password.current){
-      alert('impossível')
-    }
 
     const res = await signIn("credentials", {
       username: user.current,
@@ -32,7 +30,19 @@ export default function Login(props: Props){
 
     if (!res?.error) {
       router.push(props.callbackUrl ?? "http://localhost:3000/todos");
+      return;
     }    
+
+    
+    if(!user.current || !password.current){
+      notifyMe({message: 'Não é possível logar com usuário e senha vazios', styleClass: 'wrong', icon: '✖', position: 'top-center'})
+      return 
+    }
+
+    if(res?.error){
+      notifyMe({message: 'Usuário ou senha inválidos', styleClass: 'wrong', icon: '✖', position: 'top-center'})
+      return 
+    }
   }
 
 

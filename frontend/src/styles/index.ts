@@ -21,7 +21,8 @@ export const {
       header: '#0D0D0D',
       body: '#1A1A1A',
       containerlogin: '#262626',     
-      todocard: '#262626',
+      container: '#262626',
+      cardtodo: '#515151',
       texttodo: '#fff',
       detail: '#00a873',
       inputs: '#121214'  

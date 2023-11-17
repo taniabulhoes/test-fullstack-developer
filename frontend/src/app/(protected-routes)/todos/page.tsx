@@ -1,51 +1,45 @@
 "use client";
 
-import ApiClient from "@/lib/apiClient";
-import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
-
-type todosProps = {
-  id: string;
-  subject: string;
-  expected_date: string 
-}
+import TodoCards from "@/app/components/TodoCards";
+import { useToast } from "@/app/hooks/useToast";
+import { useTodos } from "@/app/hooks/useTodos";
+import { MagnifyingGlass } from "phosphor-react";
 
 export default function Todos(){
-  const [todos, setTodos] = useState<todosProps[]>([])
-
-const teste = useSession()
-
-console.log(teste)
-
-  const fetchPost = async () => {
-
-    const response = await ApiClient.get('/todos', {
-      params: {
-        q: '',
-        page: 1
-      }
-    });
-
-    const {todo} = response.data
-
-    setTodos(todo)
-  };
-
-
-  useEffect(() => {
-    fetchPost()    
-  }, [])
+  const {todos, fetchTodos, setSearch, search} = useTodos()
+  const handleResearch = async () => {
+    fetchTodos()
+  }
 
   return (
-    <>
-      {
-        todos.map((todo) => {
-          return (
-            <p key={todo.id}>{todo.subject}</p>
-          )
-        })
-      }
-    </>
+      <div className="">
+        <>
+          <div className="bg-todocard w-full p-4 rounded-sm mb-12 leading-3 justify-center items-center">
+            <div className="flex">
+              <input 
+                name="text" 
+                type="text" 
+                placeholder="Pesquise pelas suas atividades"
+                onChange={(e) => setSearch(e.target.value)} 
+                value={search}
+                className="bg-inputs w-full h-8 rounded-sm text-texttodo pl-2 text-sm"
+              />
+              <button 
+                onClick={handleResearch}
+                className="bg-detail rounded-sm px-2 leading-tight ml-2">
+                  <MagnifyingGlass size={20} color="#fff"/>
+              </button>
+            </div>
+          </div>
+          {
+            todos.map((todo) => {
+              return (
+                <TodoCards key={todo.id} item={todo}/>
+              )
+            })
+          }          
+        </>
+      </div>
   )
 }
 

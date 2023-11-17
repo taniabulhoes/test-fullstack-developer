@@ -1,15 +1,15 @@
 import { getSession } from 'next-auth/react';
-import { axiosAuth } from './axios';
+import { api } from './axios';
 
 const ApiClient = () => {
 
-  const instance = axiosAuth;
+  const instance = api;
 
   instance.interceptors.request.use(async (request) => {
     const session = await getSession();
 
-    console.log('se-', session)
     if (session) {
+
       request.headers.Authorization = `Bearer ${session.tokenAccess}`;
     }
     return request;

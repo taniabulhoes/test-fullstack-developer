@@ -1,3 +1,4 @@
+import { ToastContextProvider } from "@/Providers/ToastProvider";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
@@ -13,5 +14,9 @@ export default async function PrivateLayout({children}: PrivateLayoutProps){
     redirect('/todos')
   } 
 
-  return <>{children}</>
+  return (
+    <ToastContextProvider>
+      {children}
+    </ToastContextProvider>    
+  )
 }

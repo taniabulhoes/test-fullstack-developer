@@ -2,6 +2,7 @@
 
 import { signOut } from "next-auth/react"
 import router from "next/router";
+import { SignOut } from "phosphor-react";
 
 export default function Logout(){
 
@@ -14,7 +15,7 @@ export default function Logout(){
   return (
     <>
       <button onClick={() => test()} className="text-red-600">
-        Sign Out
+        <SignOut size={30} color="#00a873"/>
       </button>    
     </>
   )

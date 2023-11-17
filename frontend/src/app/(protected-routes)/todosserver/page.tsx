@@ -10,8 +10,6 @@ export default function TodosServer(){
         none: '',
       }
     });
-
-    console.log(response)
   };   
 
   

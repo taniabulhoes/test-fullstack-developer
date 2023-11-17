@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 import { nextAuthOptions } from "../api/auth/[...nextauth]/route";
 import Header from "../components/Header";
+import { ToastContextProvider } from "@/Providers/ToastProvider";
 
 interface PrivateLayoutProps {
  children: ReactNode 
@@ -18,8 +19,21 @@ export default async function PrivateLayout({children}: PrivateLayoutProps){
 
   return (
     <>
-      <Header/>  
-      {children}
+      <Header/> 
+      <div className="flex flex-col justify-center items-center">
+        <div className="
+          md:max-w-[60%]
+          md:min-w-min
+          sm:w-[90%]
+          sm:mx-8
+          rounded-sm
+          p-8
+          w-[90%]
+          my-10">
+
+            {children}                    
+        </div>
+      </div>
     </>
   )
 }

@@ -5,7 +5,7 @@ export default axios.create({
   baseURL: BASE_URL,
   headers: { "Content-Type": "application/json" },
 });
-export const axiosAuth = axios.create({
+export const api = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
   headers: { "Content-Type": "application/json" },

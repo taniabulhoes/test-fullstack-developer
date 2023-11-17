@@ -18,6 +18,21 @@ body{
   background: #1A1A1A !important;  
 }
 
+.wrong{
+  background: #ce2525 !important;
+  color: #fff !important;
+}
+
+.warning{
+  background: #c6c6c6 !important;
+  color: #000 !important;
+}
+
+.success{
+  background: #00a873 !important;
+  color: #000 !important;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
