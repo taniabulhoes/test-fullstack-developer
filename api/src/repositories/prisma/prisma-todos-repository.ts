@@ -24,13 +24,18 @@ class PrismaTodosRepository implements ITodosRepository {
   
   async list(userId: string, query?: string){
     const todos = await prisma.todo.findMany({
+      orderBy: [
+        {
+          checked: 'asc',
+        },
+      ],
       where: {
         subject: {
           contains: query,
           mode: 'insensitive'
         },
-        user_id: userId
-      }      
+        user_id: userId,
+      }
     })
 
     return todos
