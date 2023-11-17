@@ -33,7 +33,7 @@ describe('Suite test delete Todo ', () => {
 
     await sut.execute({id, user_id})
 
-    const list = await todoRepository.list(user_id, 1)
+    const list = await todoRepository.list(user_id)
 
     expect(list).toEqual([
       expect.objectContaining({ id: 'todo-deleted-02' }),

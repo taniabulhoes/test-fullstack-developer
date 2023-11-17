@@ -22,7 +22,6 @@ export async function refresh(request: FastifyRequest, reply: FastifyReply) {
     }
   })
 
-  console.log('refrescando token')
 
   return reply
     .status(200)

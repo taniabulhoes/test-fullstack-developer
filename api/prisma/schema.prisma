@@ -26,6 +26,7 @@ model Todo {
   id            String   @id @default(uuid())
   subject       String
   expected_date DateTime
+  checked       Int      @default(0)
   created_at    DateTime @default(now())
   updated_at    DateTime @default(now())
 

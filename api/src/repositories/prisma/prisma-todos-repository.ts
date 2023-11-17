@@ -20,11 +20,9 @@ class PrismaTodosRepository implements ITodosRepository {
     })
 
     return todo
-  
   }
   
   async list(userId: string, query?: string){
-    console.log(query)
     const todos = await prisma.todo.findMany({
       where: {
         subject: {
@@ -59,7 +57,6 @@ class PrismaTodosRepository implements ITodosRepository {
   }
 
   async delete(data: DeleteTodoInput){
-    console.log(data)
 
     await prisma.todo.delete({
       where: {
@@ -71,7 +68,19 @@ class PrismaTodosRepository implements ITodosRepository {
     return null
   }
 
+  async concludeTask(id: string, userId: string){
+    await prisma.todo.update({
+      where: {
+        id: id,
+        user_id: userId
+      },
+      data: {
+        checked: 1
+      }      
+    })
 
+    return null
+  }
 }
 
 export {PrismaTodosRepository}

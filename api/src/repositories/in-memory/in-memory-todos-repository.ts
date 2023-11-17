@@ -44,7 +44,8 @@ class InMemoryTodosRepository implements ITodosRepository{
       id: data.id ?? randomUUID(),
       subject: data.subject,
       expected_date: data.expected_date,
-      user_id: data.user_id
+      user_id: data.user_id,
+      checked: 0
     }
 
     this.items.push(todo)
@@ -73,6 +74,15 @@ class InMemoryTodosRepository implements ITodosRepository{
     return null
   }
 
+  async concludeTask(id: string): Promise<null> {
+    const todoIndex = this.items.findIndex((item) => item.id === id)
+
+    if(todoIndex >= 0){
+      this.items[todoIndex].checked = 1 
+    }    
+
+    return null;
+  }
 }
 
 export {InMemoryTodosRepository}

@@ -25,13 +25,13 @@ class UpdateTodoUseCase{
     const todoNotExists = await this.todoRepository.findById(id)
 
     if(!todoNotExists){
-      throw new TodoNotExists
+      throw new TodoNotExists()
     }
 
     const dateNow = new Date()
 
     if(dateNow > expected_date){
-      throw new TodoPastDateError
+      throw new TodoPastDateError()
     }
 
     const todo = await this.todoRepository.update({

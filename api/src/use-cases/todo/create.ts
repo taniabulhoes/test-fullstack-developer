@@ -22,13 +22,13 @@ class CreateTodoUseCase{
     const toDoAlredyExists = await this.todoRepository.findBySubject(subject)
 
     if(toDoAlredyExists){
-      throw new TodoAlreadyExistsError
+      throw new TodoAlreadyExistsError()
     }
 
     const dateNow = new Date()
 
     if(expected_date < dateNow){
-      throw new TodoPastDateError
+      throw new TodoPastDateError()
     }
 
     const todo = await this.todoRepository.create({

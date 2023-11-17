@@ -22,6 +22,7 @@ export interface Todo{
   subject: string,
   expected_date: Date,
   user_id: string,
+  checked?: number
 }
 
 export interface ITodosRepository {
@@ -31,4 +32,5 @@ export interface ITodosRepository {
   create(data: CreateTodoInput): Promise<Todo>,
   update(data: UpdateTodoInput): Promise<Todo>
   delete(data: DeleteTodoInput): Promise<null>
+  concludeTask(id: string): Promise<null>
 }
