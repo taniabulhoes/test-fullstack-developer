@@ -18,13 +18,13 @@ export const {
 
   theme: {
     colors: {
-      header: '#f4f4f4',
-      body: '#fff',
-      containerlogin: '#262626',
+      header: '#0D0D0D',
+      body: '#1A1A1A',
+      containerlogin: '#262626',     
       todocard: '#262626',
       texttodo: '#fff',
       detail: '#00a873',
-      inputs: '#121214'
+      inputs: '#121214'  
     },  
     
     fontSizes: {
