@@ -15,7 +15,7 @@ export default async function PrivateLayout({children}: PrivateLayoutProps){
   } 
 
   return (
-    <ToastContextProvider>
+    <ToastContextProvider>      
       {children}
     </ToastContextProvider>    
   )

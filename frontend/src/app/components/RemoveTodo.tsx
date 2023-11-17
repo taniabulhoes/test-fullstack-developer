@@ -21,9 +21,7 @@ export default function RemoveTodo({todo, id}: removeTodoProps){
   const handleRemoveTodo = async () => {
     try {
       removeTodo(id)
-      
       notifyMe({message: 'Tarefa excluida com sucesso', styleClass: 'success', icon: '🏅', position: 'top-center'})
-
     } catch (error) {
       notifyMe({message: 'Não conseguimos excluir a tarafa, tente novamente', styleClass: 'wrong', icon: '✖', position: 'top-center'})      
     }

@@ -10,9 +10,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
     <>
       <AuthNextProvider>
         <ToastContextProvider>
-          <TodosContextProvider>
             {children}
-          </TodosContextProvider>        
         </ToastContextProvider>          
       </AuthNextProvider>
     </>

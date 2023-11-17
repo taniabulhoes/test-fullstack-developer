@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 import { nextAuthOptions } from "../api/auth/[...nextauth]/route";
 import Header from "../components/Header";
 import { ToastContextProvider } from "@/Providers/ToastProvider";
+import { TodosContextProvider } from "@/Providers/TodosProvider";
 
 interface PrivateLayoutProps {
  children: ReactNode 
@@ -31,7 +32,9 @@ export default async function PrivateLayout({children}: PrivateLayoutProps){
           w-[90%]
           my-10">
 
-            {children}                    
+          <TodosContextProvider>
+            {children}
+          </TodosContextProvider>                     
         </div>
       </div>
     </>

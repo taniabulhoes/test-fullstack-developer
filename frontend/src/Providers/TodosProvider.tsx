@@ -22,6 +22,7 @@ export type TodosContextDataProps = {
   setActivityToBeDeleted: Dispatch<SetStateAction<string>>,
   activityToBeDeleted: string,
   removeTodo: (id: string) => void
+  swithTodo: (id: string) => void
 }
 
 export const TodosContext = createContext({} as TodosContextDataProps)
@@ -44,6 +45,14 @@ export function TodosContextProvider({children}: TodosContextProviderProps){
       setTodos(todo) 
     },
     [search]
+  );
+
+  const swithTodo = useCallback(
+    async (id: string) => {
+      await ApiClient.patch(`/todos/conclude/${id}`)
+       return null;
+    },
+    []
   );
 
   const removeTodo = useCallback(
@@ -69,7 +78,8 @@ export function TodosContextProvider({children}: TodosContextProviderProps){
       search,
       setActivityToBeDeleted,
       activityToBeDeleted,
-      removeTodo
+      removeTodo,
+      swithTodo
     }),
     [
       fetchTodos,
@@ -78,7 +88,8 @@ export function TodosContextProvider({children}: TodosContextProviderProps){
       search,
       setActivityToBeDeleted,
       activityToBeDeleted,
-      removeTodo
+      removeTodo,
+      swithTodo
     ]
   );
 

@@ -5,11 +5,13 @@ import { CalendarBlank, Pen, Trash } from "phosphor-react"
 import { useState } from "react"
 import SwitchCheckBox from "./SwitchCheckBox"
 import RemoveTodo from "./RemoveTodo"
+import { useTodos } from "../hooks/useTodos"
 
 type itemTodoCard = {
   id: string
   subject: string
-  expected_date: string
+  expected_date: string,
+  checked: number
 }
 
 type todoCardProps = {
@@ -17,10 +19,13 @@ type todoCardProps = {
 }
 
 export default function TodoCards({item}: todoCardProps){
-  const [switchCheck, setSwitchCheck] = useState(false)
+  const [switchCheck, setSwitchCheck] = useState(item.checked ? true : false)
+
+  const {swithTodo} = useTodos()
 
   async function handleSwitchBox(){
     setSwitchCheck(!switchCheck)
+    swithTodo(item.id)
   }
 
   var date = new Date(item.expected_date);
@@ -30,12 +35,11 @@ export default function TodoCards({item}: todoCardProps){
     <>
 
     <div className="flex flex-row">
-      <div className="
-          bg-todocard w-full flex flex-row justify-between rounded-sm mb-3 px-4 py-2 items-center
+      <div className={`bg-todocard w-full flex flex-row justify-between rounded-sm mb-3 px-4 py-2 items-center
           border-l-4 border-solid border-detail
-        ">
+        `}>
           <div className="flex">
-            <p className="text-texttodo text-sm">{item.subject}</p>
+            <p className={`${switchCheck === true ? 'line-through	text-detail' : 'text-texttodo' }  text-sm`}>{item.subject}</p>
           </div>
           <div className="flex">
             <div className="flex mr-6 mt-1">
@@ -49,7 +53,7 @@ export default function TodoCards({item}: todoCardProps){
           </div>
         </div>
         <div className="flex items-center rounded-sm bg-todocard h-5 px-2 py-5 ml-2">
-          <button>
+          <button disabled={switchCheck ?? false}>
             <Pen size={25} className="m-1" color="#fff"/>
           </button>
           <RemoveTodo todo={item.subject} id={item.id}/>
