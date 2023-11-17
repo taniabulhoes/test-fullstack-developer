@@ -1,15 +1,14 @@
 
-import Providers from "@/Providers/Provider";
+import AuthNextProvider from "@/Providers/AuthNextProvider";
 import React from "react";
 
 export default function Template({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-    <Providers>
-      {children}
-    </Providers>
-
+      <AuthNextProvider>
+        {children}
+      </AuthNextProvider>
     </>
   )
 }

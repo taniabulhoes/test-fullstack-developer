@@ -1,11 +1,14 @@
 
-import { cookies } from 'next/headers'
-
 import { NextAuthOptions } from "next-auth";
 import { JWT, decode, encode } from "next-auth/jwt";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+
+type credentialProps = {
+  username: string,
+  password: string
+}
 
 async function refreshToken(token: JWT): Promise<JWT>{
 
@@ -47,6 +50,7 @@ const nextAuthOptions: NextAuthOptions = {
       },
 
       async authorize(credentials, req) {
+
         if (!credentials?.username || !credentials?.password) return null;
 
         const response = await fetch("http://localhost:7777/sessions", {
@@ -55,8 +59,8 @@ const nextAuthOptions: NextAuthOptions = {
               "Content-Type": "application/json",
           },
           body: JSON.stringify({
-              email: 'nailson.ivs@codens.com.br',
-              password: "123456#@",
+              email: credentials.username,
+              password: credentials.password,
           }),
       });
 
@@ -73,9 +77,6 @@ const nextAuthOptions: NextAuthOptions = {
     async jwt({ token, user}) {
       if (user) return { ...token, ...user };
 
-
-      console.log(new Date().getTime(), '---')
-      console.log(token.expiresIn)
       if(new Date().getTime() < token.expiresIn) return token;
 
       const newToken = await refreshToken(token)
