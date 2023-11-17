@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import { useTodos } from "../hooks/useTodos";
 import { actionAsyncStorage } from "next/dist/client/components/action-async-storage.external";
+import { useToast } from "../hooks/useToast";
 
 type removeTodoProps = {
   id: string, 
@@ -15,14 +16,19 @@ export default function RemoveTodo({todo, id}: removeTodoProps){
   const [open, setOpen] = React.useState(false);
 
   const {removeTodo} = useTodos()
+  const {notifyMe} = useToast()
 
   const handleRemoveTodo = async () => {
-    removeTodo(id)
+    try {
+      removeTodo(id)
+      
+      notifyMe({message: 'Tarefa excluida com sucesso', styleClass: 'success', icon: '🏅', position: 'top-center'})
 
-    setTimeout(() => {
-      setOpen(false)    
-
-    }, 2000)
+    } catch (error) {
+      notifyMe({message: 'Não conseguimos excluir a tarafa, tente novamente', styleClass: 'wrong', icon: '✖', position: 'top-center'})      
+    }
+    
+    setOpen(false)        
   }
 
   return (

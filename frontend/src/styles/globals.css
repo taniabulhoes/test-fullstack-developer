@@ -30,7 +30,7 @@ body{
 
 .success{
   background: #00a873 !important;
-  color: #000 !important;
+  color: #fff !important;
 }
 
 @media (prefers-color-scheme: dark) {
