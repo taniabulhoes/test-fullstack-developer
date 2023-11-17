@@ -4,6 +4,8 @@ import { InvalidCredentialsError } from "src/use-cases/errors/user-invalid-crede
 import { makeAuthenticateUseCase } from "src/use-cases/factories/make-authenticate-use-case";
 import { z } from "zod";
 
+const EXPIRES_IN = 1000 * 60 * 60 * 24 * 1  //1d
+
 export async function authenticate(request: FastifyRequest, reply: FastifyReply){
   const authenticateBodySchema = z.object({
     email: z.string().email(),
@@ -38,16 +40,18 @@ export async function authenticate(request: FastifyRequest, reply: FastifyReply)
       }
     })
       
+    var data = new Date()
+    data.setMinutes(data.getMinutes() + EXPIRES_IN);    
+
+    const expireToken = data.getTime()
+
     return reply
-      .setCookie('refreshToken', refreshToken, {
-        path: '/',
-        secure: true,
-        sameSite: true,
-        httpOnly: true,
-      })
     .status(200)
     .send({
-      token, user: { ...user, password_hash: undefined, created_at: undefined }
+      tokenAccess: token, 
+      refreshToken,
+      expiresIn: expireToken, 
+      user: { ...user, password_hash: undefined, created_at: undefined }
     }) 
 
   } catch (error) {

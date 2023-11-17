@@ -1,4 +1,3 @@
-import { Prisma } from '@prisma/client'
 import { IUsersRepository, User, UserCreateInput } from '../i-user-repository'
 import { prisma } from 'src/lib/prisma'
 

@@ -1,9 +1,9 @@
 import { env } from '@/env'
-import { FastifyReply, FastifyRequest } from 'fastify'
+import fastify, { FastifyReply, FastifyRequest } from 'fastify'
 
 export async function refresh(request: FastifyRequest, reply: FastifyReply) {  
-  await request.jwtVerify({ onlyCookie: true })
-  
+  await request.jwtVerify()
+
   const token = await reply.jwtSign({
     name: env.NAME_TOKEN
   },{
@@ -22,15 +22,12 @@ export async function refresh(request: FastifyRequest, reply: FastifyReply) {
     }
   })
 
+  console.log('refrescando token')
+
   return reply
-    .setCookie('refreshToken', refreshToken, {
-      path: '/',
-      secure: true,
-      sameSite: true,
-      httpOnly: true,
-    })
     .status(200)
     .send({
-      token,
+      tokenAccess: token,
+      refreshToken
     })
 }

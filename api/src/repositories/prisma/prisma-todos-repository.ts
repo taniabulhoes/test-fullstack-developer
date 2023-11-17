@@ -1,5 +1,3 @@
-import { Prisma } from '@prisma/client'
-import { IUsersRepository, User, UserCreateInput } from '../i-user-repository'
 import { prisma } from 'src/lib/prisma'
 import { CreateTodoInput, DeleteTodoInput, ITodosRepository, Todo, UpdateTodoInput } from '../i-todo-repository'
 
@@ -32,7 +30,8 @@ class PrismaTodosRepository implements ITodosRepository {
         subject: {
           contains: query,
           mode: 'insensitive'
-        }
+        },
+        user_id: userId
       }      
     })
 
