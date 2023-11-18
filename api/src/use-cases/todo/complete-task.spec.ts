@@ -2,6 +2,7 @@ import { InMemoryTodosRepository } from "@/repositories/in-memory/in-memory-todo
 import { beforeEach, describe, expect, it } from "vitest";
 import { ConcludeTodoUseCase } from "./conclude-todo";
 import { nextMonthDate } from "@/utils/next-month-date";
+import { TodoNotExists } from "../errors/todo-not-exists";
 
 let todoRepository: InMemoryTodosRepository
 let sut: ConcludeTodoUseCase
@@ -53,6 +54,11 @@ describe('Suite test complete task', () => {
     expect(list).toEqual([
       expect.objectContaining({ checked: 0 }),
     ])
-
-  })  
+  })
+  
+  it('Should not be able to conclude if todo no exists', async () => {
+    await expect(() => 
+    sut.execute({id: 'non-existent-todo', user_id: 'user-01'})    
+  ).rejects.toBeInstanceOf(TodoNotExists)
+  })
 })

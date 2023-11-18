@@ -18,7 +18,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply){
 
     const expectedDate = new Date(expected_date)
 
-    const todo = await createTodoUseCase.execute({
+    await createTodoUseCase.execute({
       subject,
       expected_date: expectedDate,
       user_id: request.user.sub
@@ -31,7 +31,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply){
     }    
 
     if(error instanceof TodoPastDateError) {
-      return reply.status(409).send({message: error.message})
+      return reply.status(404).send({message: error.message})
     }    
   }
 

@@ -23,7 +23,7 @@ export async function deleteTodo(request: FastifyRequest, reply: FastifyReply){
   } catch (error) {
 
     if(error instanceof TodoNotExists) {
-      return reply.status(409).send({message: error.message})
+      return reply.status(404).send({message: error.message})
     }    
     
   }

@@ -24,7 +24,7 @@ export async function updateTodo(request: FastifyRequest, reply: FastifyReply){
 
     const expectedDate = new Date(expected_date)
 
-    const todo = await updateTodoUseCase.execute({
+    await updateTodoUseCase.execute({
       id,
       subject,
       expected_date: expectedDate,
@@ -37,7 +37,7 @@ export async function updateTodo(request: FastifyRequest, reply: FastifyReply){
     }    
 
     if(error instanceof TodoNotExists) {
-      return reply.status(409).send({message: error.message})
+      return reply.status(404).send({message: error.message})
     }    
     
   }

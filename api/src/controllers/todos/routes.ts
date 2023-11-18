@@ -5,10 +5,12 @@ import { listTodos } from "./list-todo";
 import { deleteTodo } from "./delete-todo";
 import { verifyJwt } from "src/middlewares/verify-jwt";
 import { conclude } from "./conclude-todo";
+import { getTodoById } from "./get-todo-by-id";
 
 export async function todosRoutes(app: FastifyInstance){
   app.addHook('onRequest', verifyJwt)
-
+  
+  app.get('/todos/todo/:id', getTodoById)
   app.get('/todos', listTodos)
   app.post('/todos', create)
   app.put('/todos/:id', updateTodo)

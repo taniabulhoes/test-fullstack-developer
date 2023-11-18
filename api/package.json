@@ -3,7 +3,7 @@
     "dev": "tsx watch src/server.ts",
     "test:watch": "vitest --dir src/use-cases",
     "test": "vitest run --dir src/use-cases",
-    "buid": "tsup src --out-dir build"
+    "build": "tsup src --out-dir build"
   },
   "devDependencies": {
     "@types/node": "^20.9.0",
