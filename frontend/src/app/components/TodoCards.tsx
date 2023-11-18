@@ -36,7 +36,7 @@ export default function TodoCards({item}: todoCardProps){
   }
 
   const date = new Date(item.expected_date);
-  const formattedDate = format(date, "yyyy/MM/dd");
+  const formattedDate = format(date, "dd/MM/yyyy");
 
   return (
     <>
