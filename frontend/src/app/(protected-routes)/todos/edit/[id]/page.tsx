@@ -170,7 +170,7 @@ export default function EditTodo (){
           (
             <>
               <p className="text-texttodo md:text-4xl sm:text-3xl md:w-[100%] w-[100%] font-bold sm:pt-10 mb-14 md:text-left sm:text-center">Ops! Não conseguimos achar nenhuma atividade com esta identificação</p>
-              <Link href="./todos">Voltar</Link>
+              <Link href="/todos" className="text-center text-detail">Voltar</Link>
             </>
           )
         }
