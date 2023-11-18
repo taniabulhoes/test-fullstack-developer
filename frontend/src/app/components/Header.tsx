@@ -14,7 +14,7 @@ export default async function Header(){
       <div className="bg-header flex items-center justify-between h-[120px]">
         <div className="flex items-center justify-normal">
           <div> 
-            <Link href="/todos">
+            <Link href="/todos" prefetch={false}>
               <Image src={logo} width={70} height={70} alt="Logo tipo da empresa Todo List"/>
             </Link>            
           </div>

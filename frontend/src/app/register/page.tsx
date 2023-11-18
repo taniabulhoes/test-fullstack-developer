@@ -7,6 +7,7 @@ import { useToast } from "../hooks/useToast";
 import { api } from "@/lib/axios";
 import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
+import Link from "next/link";
 
 export default function Register(){
   const route = useRouter()
@@ -138,7 +139,8 @@ export default function Register(){
           onClick={handleRegister}
         >
           <p className="text-texttodo font-bold text-sm">ACESSAR</p>
-        </button>        
+        </button>    
+        <Link href="/signin" className="text-center text-detail mt-4" prefetch={false}>Voltar</Link>
       </div>
     </div>
   )

@@ -130,11 +130,14 @@ export default function EditTodo (){
             <>
                 <p className="text-texttodo md:text-4xl sm:text-3xl md:w-[100%] w-[100%] font-bold sm:pt-10 mb-14 md:text-left sm:text-center">Editar</p>
                 
-                {
-                  todo ? (
-                    <RemoveTodo todo={todo.subject} id={todo.id} redirect={true}/>
-                  ) : null
-                }
+                <div className="flex items-center justify-end">
+                  <p className="text-detail text-sm">Deletar atividade</p>
+                  {
+                    todo ? (
+                      <RemoveTodo todo={todo.subject} id={todo.id} redirect={true}/>
+                    ) : null
+                  }
+                </div>
 
                 <ComputedInput
                   label="Atividade"
@@ -170,7 +173,7 @@ export default function EditTodo (){
           (
             <>
               <p className="text-texttodo md:text-4xl sm:text-3xl md:w-[100%] w-[100%] font-bold sm:pt-10 mb-14 md:text-left sm:text-center">Ops! Não conseguimos achar nenhuma atividade com esta identificação</p>
-              <Link href="/todos" className="text-center text-detail">Voltar</Link>
+              <Link href="/todos" className="text-center text-detail" prefetch={false}>Voltar</Link>
             </>
           )
         }
