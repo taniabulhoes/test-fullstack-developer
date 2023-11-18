@@ -28,10 +28,11 @@ export default function Login(props: Props){
       username: user.current,
       password: password.current,
       redirect: false,
+      callbackUrl: '/todo'
     });      
 
     if (!res?.error) {
-      router.push(props.callbackUrl ?? "http://localhost:3000/todos");
+      router.push(props.callbackUrl ?? "/todos");
       return;
     }    
 
