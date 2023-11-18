@@ -29,7 +29,7 @@ export default function Login(props: Props){
     });      
 
     if (!res?.error) {
-      router.push(props.callbackUrl ?? "/todos");
+      router.push(props.callbackUrl ?? "https://test-fullstack-developer.vercel.app/todos");
       return;
     }    
     
