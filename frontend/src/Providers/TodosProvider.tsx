@@ -37,12 +37,13 @@ export function TodosContextProvider({children}: TodosContextProviderProps){
 
   const fetchTodos = useCallback(
     async (searchText?: string) => {
+      setEmptyList('loading')
+
       const response = await ApiClient.get('/todos', {
         params: {
           q: searchText || ''
         }
       });
-
   
       const {todo} = response.data
   

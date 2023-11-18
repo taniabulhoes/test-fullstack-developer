@@ -43,6 +43,14 @@ export default function Todos(){
             </div>
           </div>
           {
+           emptyList == 'loading' ? 
+           (
+            <>sadsadsadsadsadsadsadsad</>
+           ):
+           null
+          }
+ 
+          {
             emptyList == 'empty' ? 
             (
               <EmptyTodos/>
