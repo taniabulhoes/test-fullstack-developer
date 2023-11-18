@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 import Header from "../components/Header";
 import { TodosContextProvider } from "@/Providers/TodosProvider";
 import { nextAuthOptions } from "../api/auth/[...nextauth]/options";
+import SubHeader from "../components/SubHead";
 
 interface PrivateLayoutProps {
  children: ReactNode 
@@ -19,6 +20,7 @@ export default async function PrivateLayout({children}: PrivateLayoutProps){
   return (
     <>
       <Header/> 
+      <SubHeader/>
       <div className="flex flex-col justify-center items-center">
         <div className="
           md:max-w-[60%]

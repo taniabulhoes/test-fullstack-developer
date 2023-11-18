@@ -20,7 +20,7 @@ const ApiClient = () => {
       return response;
     },
     (error) => {
-      console.log(`error`, error);
+      throw error
     },
   );
 

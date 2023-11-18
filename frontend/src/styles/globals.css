@@ -38,6 +38,16 @@ button[disabled]{
 }
 
 
+input[type="datetime-local"]{
+  color-scheme: dark;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  color: #00a873;
+  font-size: 20px;
+  padding-right: 10px;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;

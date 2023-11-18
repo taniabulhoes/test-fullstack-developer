@@ -46,12 +46,6 @@ export default function Register(){
     }
   }
 
-  const handleRegister = async () => {
-    if (!(await validate())) return;
-
-    saveUser()
-  }
-
   const saveUser = async () => {
     
     try {
@@ -61,16 +55,23 @@ export default function Register(){
         password: password.current
       })     
  
-      notifyMe({message: 'Você foi cadastro! Agora é só logar', styleClass: 'success', icon: '✖', position: 'top-center'})
+      notifyMe({message: 'Você foi cadastro! Agora é só logar', styleClass: 'success', icon: '👏', position: 'top-center'})
 
       setTimeout(() => {
+        route.push('/todos')      
         dimissToast()
-        route.push('/signin')      
-      }, 700);
+      }, 2500);
+
       return
     } catch (error) {
       notifyMe({message: 'Ops! Não conseguimos cadastrar você, tente novamente', styleClass: 'warning', icon: '⚠️', position: 'top-center'})      
     }
+  }
+
+  const handleRegister = async () => {
+    if (!(await validate())) return;
+
+    saveUser()
   }
 
   return(
@@ -95,6 +96,7 @@ export default function Register(){
           label="Nome"
           name="Nome"
           type="text"
+          placeholder='Seu nome'
           required={true}
           onChange={(e) => (nome.current = e.target.value)}
         />
@@ -102,6 +104,7 @@ export default function Register(){
         <FormInput
           label="Email"
           name="email"
+          placeholder='Email'
           type="text"
           required={true}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => (email.current = e.target.value)}
@@ -109,6 +112,7 @@ export default function Register(){
 
         <FormInput
           label="Senha"
+          placeholder='******'
           name="password"
           type="password"
           required={true}
@@ -118,6 +122,7 @@ export default function Register(){
         <FormInput
           label="Confirme sua senha"
           name="password_confirm"
+          placeholder='******'
           type="password"
           required={true}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => (password_confirm.current = e.target.value)}

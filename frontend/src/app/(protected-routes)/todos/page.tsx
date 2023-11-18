@@ -3,7 +3,7 @@
 import TodoCards from "@/app/components/TodoCards";
 import { useTodos } from "@/app/hooks/useTodos";
 import { MagnifyingGlass } from "phosphor-react";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 
 export default function Todos(){
@@ -14,6 +14,12 @@ export default function Todos(){
   const handleResearch = async () => {
     fetchTodos(searchText)
   }
+
+
+  useEffect(() => {
+    fetchTodos()   
+  }, [fetchTodos])
+
 
   return (
       <div className="">

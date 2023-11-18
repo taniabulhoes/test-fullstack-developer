@@ -4,12 +4,12 @@ type InputProps = {
   name:string,
   required: boolean
   label?: string,
-  type: string,
+  type: 'date' | 'datetime-local',
   placeholder?: string
   onChange: (...args: any) => string;
 }
 
-export default function FormInput ({name, required, type, label, placeholder, onChange}: InputProps) {
+export default function FormDateInput ({name, required, type, label, placeholder, onChange}: InputProps) {
   return (
     <div className="mb-4">
         {
