@@ -6,6 +6,7 @@ import { useState } from "react"
 import SwitchCheckBox from "./SwitchCheckBox"
 import RemoveTodo from "./RemoveTodo"
 import { useTodos } from "../hooks/useTodos"
+import { useRouter } from "next/navigation"
 
 type itemTodoCard = {
   id: string
@@ -21,11 +22,16 @@ type todoCardProps = {
 export default function TodoCards({item}: todoCardProps){
   const [switchCheck, setSwitchCheck] = useState(item.checked ? true : false)
 
+  const route = useRouter()
   const {swithTodo} = useTodos()
 
-  async function handleSwitchBox(){
+  const handleSwitchBox = async () =>{
     setSwitchCheck(!switchCheck)
     swithTodo(item.id)
+  }
+
+  const handleLinkPageEdit = (idTodo: string) => {
+    route.push(`/todos/edit/${idTodo}`)
   }
 
   var date = new Date(item.expected_date);
@@ -53,7 +59,7 @@ export default function TodoCards({item}: todoCardProps){
           </div>
         </div>
         <div className="flex items-center rounded-sm bg-todocard h-5 px-2 py-5 ml-2">
-          <button disabled={switchCheck ?? false}>
+          <button disabled={switchCheck ?? false} onClick={(e) => handleLinkPageEdit(item.id)}>
             <Pen size={25} className="m-1" color="#fff"/>
           </button>
           <RemoveTodo todo={item.subject} id={item.id}/>
