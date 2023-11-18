@@ -25,11 +25,11 @@ export default function Login(props: Props){
       username: user.current,
       password: password.current,
       redirect: false,
-      callbackUrl: 'http://localhost:3000/todo'
+      callbackUrl: 'https://test-fullstack-developer.vercel.app/todo'
     });      
 
     if (!res?.error) {
-      router.push(props.callbackUrl ?? "http://localhost:3000/todos");
+      router.push(props.callbackUrl ?? "https://test-fullstack-developer.vercel.app/todos");
       return;
     }    
 
