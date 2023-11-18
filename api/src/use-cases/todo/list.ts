@@ -1,19 +1,20 @@
-import { ITodosRepository } from "src/repositories/i-todo-repository"
+import { ITodosRepository, Todo } from "src/repositories/i-todo-repository"
 
 interface ListTodoRequest {
-  userId: string,
-  page: number,
+  user_id: string,
   query?: string
 }
+
+type TodoUseCaseResponse = Todo[]
 
 class ListTodoUseCase {
   constructor(private todoRepository: ITodosRepository){
     this.todoRepository = todoRepository
   }
 
-  async execute({userId, page, query}: ListTodoRequest){
+  async execute({user_id, query}: ListTodoRequest): Promise<TodoUseCaseResponse>{
 
-    const todos = await this.todoRepository.list(userId, page, query)
+    const todos = await this.todoRepository.list(user_id, query)
 
     return todos
   }

@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { UserAlreadyExistsError } from "src/use-cases/errors/user-already-exists";
-import { makeCreateUserUseCase } from "src/use-cases/factories/make-create-user";
+import { makeCreateUserUseCase } from "src/use-cases/factories/make-create-user-use-case";
 import { z } from "zod";
 
 export async function createUser(request: FastifyRequest, reply: FastifyReply){
@@ -23,7 +23,7 @@ export async function createUser(request: FastifyRequest, reply: FastifyReply){
   } catch (error) {
 
     if(error instanceof UserAlreadyExistsError) {
-      return reply.status(409).send({message: error.message})
+      return reply.status(400).send({message: error.message})
     }    
   }
 

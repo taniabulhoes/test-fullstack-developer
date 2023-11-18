@@ -13,8 +13,7 @@ class DeleteTodoUseCase{
     this.todoRepository = todoRepository
   }
   
-  async execute({id, user_id}: DeleteTodoRequest){
-console.log('asdsa')
+  async execute({id, user_id}: DeleteTodoRequest): Promise<null>{
     const toDoAlredyExists = await this.todoRepository.findById(id)
 
     if(!toDoAlredyExists){
@@ -26,7 +25,6 @@ console.log('asdsa')
       user_id,
     })
 
-    console.log(todo)
     return null
   }
 }

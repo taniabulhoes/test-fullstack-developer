@@ -1,7 +1,5 @@
-import { Prisma } from '@prisma/client'
-import { IUsersRepository, User, UserCreateInput } from '../i-user-repository'
 import { prisma } from 'src/lib/prisma'
-import { CreateTodoInput, DeleteTodoInput, ITodosRepository, Todo, UpdateTodoInput } from '../i-todo-repository'
+import { CreateTodoInput, DeleteTodoInput, ITodosRepository, Metrics, Todo, UpdateTodoInput } from '../i-todo-repository'
 
 class PrismaTodosRepository implements ITodosRepository {
   async findById(id: string) {
@@ -22,23 +20,43 @@ class PrismaTodosRepository implements ITodosRepository {
     })
 
     return todo
-  
   }
   
-  async list(userId: string, page: number, query?: string){
-    console.log(query)
+  async list(userId: string, query?: string){
     const todos = await prisma.todo.findMany({
+      orderBy: [
+        {
+          checked: 'asc',
+        },
+      ],
       where: {
         subject: {
           contains: query,
           mode: 'insensitive'
-        }
-      }      
+        },
+        user_id: userId,
+      }
     })
 
     return todos
   }
  
+  async metrics(userId: string){
+    const totalTodos = await prisma.todo.count()
+    const totalConcludes = await prisma.todo.count({
+      where: {
+        checked: 1
+      }
+    })
+
+    const metrics: Metrics = {
+      total_todos: totalTodos,
+      total_conclude: totalConcludes
+    }
+
+    return metrics
+  }
+  
   async create(data: CreateTodoInput){
     const todo = await prisma.todo.create({
       data,
@@ -60,7 +78,6 @@ class PrismaTodosRepository implements ITodosRepository {
   }
 
   async delete(data: DeleteTodoInput){
-    console.log(data)
 
     await prisma.todo.delete({
       where: {
@@ -72,7 +89,19 @@ class PrismaTodosRepository implements ITodosRepository {
     return null
   }
 
+  async concludeTask(id: string, userId: string, check: number){
+    await prisma.todo.update({
+      where: {
+        id: id,
+        user_id: userId
+      },
+      data: {
+        checked: check
+      }      
+    })
 
+    return null
+  }
 }
 
 export {PrismaTodosRepository}

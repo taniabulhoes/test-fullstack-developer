@@ -1,6 +1,6 @@
-import { IUsersRepository } from 'api/src/repositories/i-user-repository';
 import { hash } from 'bcryptjs'
 import { UserAlreadyExistsError } from '../errors/user-already-exists';
+import { IUsersRepository, User } from 'src/repositories/i-user-repository';
 
 
 interface CreateUserRequest {
@@ -9,6 +9,12 @@ interface CreateUserRequest {
   password: string;
 }
 
+
+interface UserUseCaseResponse {
+  user: User
+}
+
+
 export class CreateUserUseCase {
   constructor(private usersRepository: IUsersRepository){
     this.usersRepository = usersRepository    
@@ -16,7 +22,7 @@ export class CreateUserUseCase {
 
   async execute({
     name, email, password
-  }: CreateUserRequest){
+  }: CreateUserRequest): Promise<UserUseCaseResponse>{
 
     const password_hash = await hash(password, 6)
     

@@ -1,7 +1,7 @@
 import { randomUUID } from "crypto";
-import { CreateTodoInput, DeleteTodoInput, ITodoRepository, Todo, UpdateTodoInput } from "../i-todo-repository";
+import { CreateTodoInput, DeleteTodoInput, ITodosRepository, Metrics, Todo, UpdateTodoInput } from "../i-todo-repository";
 
-class InMemoryTodosRepository implements ITodoRepository{
+class InMemoryTodosRepository implements ITodosRepository{
 
   public items: Todo[] = [] 
 
@@ -25,7 +25,7 @@ class InMemoryTodosRepository implements ITodoRepository{
     return toDo
   }
 
-  async list(userId: string, page: number, query?: string){
+  async list(userId: string, query?: string){
     const todos = this.items
       .filter((item) => {
         if(query != undefined){
@@ -34,18 +34,34 @@ class InMemoryTodosRepository implements ITodoRepository{
           return item.user_id === userId
         }
       })
-      .slice((page - 1) * 10, page * 10)
 
     return todos  
   }
 
+  async metrics(userId: string) {
+    const totalTodos = this.items.length
+
+    const totalConcludes = this.items.filter((todo) => {
+      if(todo.checked === 1){
+        return todo.checked
+      }
+    })
+
+    const metrics: Metrics = {      
+      total_todos: totalTodos,
+      total_conclude: totalConcludes.length
+    }
+
+    return metrics
+  }  
 
   async create(data: CreateTodoInput) {
     const todo = {
       id: data.id ?? randomUUID(),
       subject: data.subject,
       expected_date: data.expected_date,
-      user_id: data.user_id
+      user_id: data.user_id,
+      checked: data.checked
     }
 
     this.items.push(todo)
@@ -74,6 +90,15 @@ class InMemoryTodosRepository implements ITodoRepository{
     return null
   }
 
+  async concludeTask(id: string, user_id: string, check: number): Promise<null> {
+    const todoIndex = this.items.findIndex((item) => item.id === id)
+
+    if(todoIndex >= 0){
+      this.items[todoIndex].checked = check
+    }    
+
+    return null;
+  }
 }
 
 export {InMemoryTodosRepository}

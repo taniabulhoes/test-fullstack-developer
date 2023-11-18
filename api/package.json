@@ -2,23 +2,27 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "test:watch": "vitest --dir src/use-cases",
-    "buid": "tsup src --out-dir build"
+    "test": "vitest run --dir src/use-cases",
+    "build": "tsup src --out-dir build"
   },
   "devDependencies": {
     "@types/node": "^20.9.0",
-    "prisma": "^5.6.0",
-    "tsup": "^7.2.0",
-    "tsx": "^4.1.2",
-    "typescript": "^5.2.2",
-    "vite-tsconfig-paths": "^4.2.1",
-    "vitest": "^0.34.6"
+    "prisma": "5.6.0",
+    "tsup": "7.2.0",
+    "tsx": "4.1.2",
+    "typescript": "5.2.2",
+    "vite-tsconfig-paths": "4.2.1",
+    "vitest": "0.34.6"
   },
   "dependencies": {
-    "@prisma/client": "^5.6.0",
-    "@types/bcryptjs": "^2.4.6",
-    "bcryptjs": "^2.4.3",
-    "dotenv": "^16.3.1",
-    "fastify": "^4.24.3",
-    "zod": "^3.22.4"
+    "@fastify/cookie": "8.3.0",
+    "@fastify/cors": "8.4.1",
+    "@fastify/jwt": "6.7.0",
+    "@prisma/client": "5.6.0",
+    "@types/bcryptjs": "2.4.6",
+    "bcryptjs": "2.4.3",
+    "dotenv": "16.3.1",
+    "fastify": "4.24.3",
+    "zod": "3.22.4"
   }
 }

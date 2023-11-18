@@ -2,8 +2,8 @@ import { PrismaTodosRepository } from "src/repositories/prisma/prisma-todos-repo
 import { UpdateTodoUseCase } from "../todo/update"
 
 export function makeUpdateTodoUseCase() {
-  const userRepository = new PrismaTodosRepository()
-  const useCase = new UpdateTodoUseCase(userRepository)
+  const todoRepository = new PrismaTodosRepository()
+  const useCase = new UpdateTodoUseCase(todoRepository)
 
   return useCase
 }

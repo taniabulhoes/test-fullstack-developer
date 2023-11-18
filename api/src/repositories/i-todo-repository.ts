@@ -3,6 +3,7 @@ export interface CreateTodoInput {
   subject: string,
   expected_date: Date,
   user_id: string,
+  checked?: number
 }
 
 export interface UpdateTodoInput {
@@ -22,13 +23,21 @@ export interface Todo{
   subject: string,
   expected_date: Date,
   user_id: string,
+  checked?: number
+}
+
+export interface Metrics{
+  total_conclude: number,
+  total_todos: number
 }
 
 export interface ITodosRepository {
   findById(id: string): Promise<Todo | null>,
-  findBySubject(todo: string): Promise<Todo | null>
-  list(userId: string, page: number, query?: string): Promise<Todo[]>
+  findBySubject(subject: string): Promise<Todo | null>
+  list(userId: string, query?: string): Promise<Todo[]>
+  metrics(userId: string): Promise<Metrics>
   create(data: CreateTodoInput): Promise<Todo>,
   update(data: UpdateTodoInput): Promise<Todo>
   delete(data: DeleteTodoInput): Promise<null>
+  concludeTask(id: string, userId: string, check: number): Promise<null>
 }

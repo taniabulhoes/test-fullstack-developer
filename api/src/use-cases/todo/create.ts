@@ -1,4 +1,4 @@
-import { ITodosRepository } from "src/repositories/i-todo-repository";
+import { ITodosRepository, Todo } from "src/repositories/i-todo-repository";
 import { TodoAlreadyExistsError } from "../errors/todo-already-exists";
 import { TodoPastDateError } from "../errors/todo-past-date";
 
@@ -8,23 +8,27 @@ interface CreateTodoRequest {
   user_id: string
 }
 
+interface TodoUseCaseResponse {
+  todo: Todo
+}
+
 class CreateTodoUseCase{
   constructor(private todoRepository: ITodosRepository){
     this.todoRepository = todoRepository
   }
   
-  async execute({subject, expected_date, user_id}: CreateTodoRequest){
+  async execute({subject, expected_date, user_id}: CreateTodoRequest): Promise<TodoUseCaseResponse>{
 
     const toDoAlredyExists = await this.todoRepository.findBySubject(subject)
 
     if(toDoAlredyExists){
-      throw new TodoAlreadyExistsError
+      throw new TodoAlreadyExistsError()
     }
 
     const dateNow = new Date()
 
     if(expected_date < dateNow){
-      throw new TodoPastDateError
+      throw new TodoPastDateError()
     }
 
     const todo = await this.todoRepository.create({
