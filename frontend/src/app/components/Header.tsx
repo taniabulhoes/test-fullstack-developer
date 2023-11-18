@@ -1,9 +1,10 @@
 
 import { getServerSession } from "next-auth"
-import { nextAuthOptions } from "../api/auth/[...nextauth]/route"
 import Logout from "./Logout"
 import Image from "next/image"
 import logo from '../../assets/Logo.png'
+import Link from "next/link"
+import { nextAuthOptions } from "../api/auth/[...nextauth]/options"
 
 export default async function Header(){
   const session = await getServerSession(nextAuthOptions)
@@ -11,8 +12,19 @@ export default async function Header(){
   return (
   <>
       <div className="bg-header flex items-center justify-between h-[120px]">
-        <div> 
-          <Image src={logo} width={70} height={70} alt="Logo tipo da empresa Todo List"/>
+        <div className="flex items-center justify-normal">
+          <div> 
+            <Image src={logo} width={70} height={70} alt="Logo tipo da empresa Todo List"/>
+          </div>
+          <div>
+
+            <Link href="/todos" prefetch={false} className="text-detail text-sm ml-4 mr-4">
+              Home
+            </Link>
+            <Link href="todos/create" prefetch={false} className="text-detail text-sm">
+              Adicionar atividade
+            </Link>
+          </div>
         </div>
         <div className="flex mr-4">
           <p className="text-texttodo mr-10">Olá {session && session?.user.name}</p>

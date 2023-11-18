@@ -15,7 +15,7 @@ type todosProps = {
 }
 
 export type TodosContextDataProps = {
-  fetchTodos: () => Promise<void>,
+  fetchTodos: (searchText?: string) => Promise<void>,
   todos: todosProps[],
   setSearch: Dispatch<SetStateAction<string>>,
   search: string,
@@ -33,10 +33,10 @@ export function TodosContextProvider({children}: TodosContextProviderProps){
   const [activityToBeDeleted, setActivityToBeDeleted] = useState<string>('')
 
   const fetchTodos = useCallback(
-    async () => {
+    async (searchText?: string) => {
       const response = await ApiClient.get('/todos', {
         params: {
-          q: search
+          q: searchText || ''
         }
       });
   
@@ -44,7 +44,7 @@ export function TodosContextProvider({children}: TodosContextProviderProps){
   
       setTodos(todo) 
     },
-    [search]
+    []
   );
 
   const swithTodo = useCallback(
@@ -58,17 +58,15 @@ export function TodosContextProvider({children}: TodosContextProviderProps){
   const removeTodo = useCallback(
     async (id: string) => {
       await ApiClient.delete(`/todos/${id}`)
-
-
       fetchTodos()
       return null;
     },
-    []
+    [fetchTodos]
   );
 
   useEffect(() => {
     fetchTodos()    
-  }, [])
+  }, [fetchTodos])
   
   const value = useMemo(
     () => ({

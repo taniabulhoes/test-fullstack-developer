@@ -11,7 +11,7 @@ type itemTodoCard = {
   id: string
   subject: string
   expected_date: string,
-  checked: number
+  checked?: number
 }
 
 type todoCardProps = {

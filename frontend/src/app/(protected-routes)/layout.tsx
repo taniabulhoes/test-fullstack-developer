@@ -1,10 +1,9 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
-import { nextAuthOptions } from "../api/auth/[...nextauth]/route";
 import Header from "../components/Header";
-import { ToastContextProvider } from "@/Providers/ToastProvider";
 import { TodosContextProvider } from "@/Providers/TodosProvider";
+import { nextAuthOptions } from "../api/auth/[...nextauth]/options";
 
 interface PrivateLayoutProps {
  children: ReactNode 
@@ -12,7 +11,6 @@ interface PrivateLayoutProps {
 
 export default async function PrivateLayout({children}: PrivateLayoutProps){
   const session = await getServerSession(nextAuthOptions)
-
 
   if(!session) {
     redirect('/signin')

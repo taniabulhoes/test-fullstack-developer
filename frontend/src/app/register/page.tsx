@@ -16,8 +16,6 @@ export default function Register(){
   const password = useRef<string>('');
   const password_confirm = useRef<string>('');
 
-
-
   const validate = async () =>{
     let schema = yup.object().shape({
       password_confirm: yup.string().required('Confirme a senha')
@@ -57,7 +55,7 @@ export default function Register(){
   const saveUser = async () => {
     
     try {
-      const response = await api.post('/users', {
+      await api.post('/users', {
         name: nome.current,
         email: email.current,
         password: password.current

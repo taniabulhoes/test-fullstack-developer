@@ -29,7 +29,8 @@ module.exports = {
     colors: {
       'header': '#0D0D0D',
       'body': '#1A1A1A',
-      'containerlogin': '#262626',     
+      'containerlogin': '#262626', 
+      'container': '#262626',    
       'todocard': '#2d2d2d',
       'texttodo': '#fff',
       'detail': '#00a873',
