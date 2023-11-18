@@ -13,6 +13,9 @@ export default async function SubHeader(){
         <Link href="/todos/create" prefetch={false} className="text-detail text-sm">
           Adicionar atividade
         </Link>
+        <Link href="/todos/metrics" prefetch={false} className="text-detail text-sm ml-4 mr-4">
+          Métricas
+        </Link>        
       </div>
     </div>
   </>
