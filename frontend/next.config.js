@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  exclude: ["babel.config.js"]  
-}
+const nextConfig = {}
 
 module.exports = nextConfig
