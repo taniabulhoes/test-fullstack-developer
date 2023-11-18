@@ -3,18 +3,20 @@ import '../../styles/alertDialog.css'
 import React, { useState } from 'react';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import { useTodos } from "../hooks/useTodos";
-import { actionAsyncStorage } from "next/dist/client/components/action-async-storage.external";
 import { useToast } from "../hooks/useToast";
+import { useRouter } from "next/navigation";
 
 type removeTodoProps = {
   id: string, 
   todo: string
+  redirect?: boolean
 }
 
-export default function RemoveTodo({todo, id}: removeTodoProps){
+export default function RemoveTodo({todo, id, redirect}: removeTodoProps){
   const [show, setShow] = useState(false)
   const [open, setOpen] = React.useState(false);
 
+  const route = useRouter()
   const {removeTodo} = useTodos()
   const {notifyMe} = useToast()
 
@@ -22,6 +24,12 @@ export default function RemoveTodo({todo, id}: removeTodoProps){
     try {
       removeTodo(id)
       notifyMe({message: 'Tarefa excluida com sucesso', styleClass: 'success', icon: '🏅', position: 'top-center'})
+
+      if(redirect){
+        setTimeout(() => {
+          route.push('/todos')
+        }, 1000);  
+      }
     } catch (error) {
       notifyMe({message: 'Não conseguimos excluir a tarafa, tente novamente', styleClass: 'wrong', icon: '✖', position: 'top-center'})      
     }

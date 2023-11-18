@@ -5,10 +5,10 @@ import FormDateInput from "@/app/components/form/DateInput.";
 import FormInput from "@/app/components/form/Input";
 import { FloppyDiskBack } from "phosphor-react";
 import * as yup from 'yup';
-import { api } from "@/lib/axios";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/app/hooks/useToast";
 import ApiClient from "@/lib/ApiClient";
+import { AxiosError } from "axios";
 
 export default function CreateTodo(){
   const route = useRouter()
@@ -61,11 +61,14 @@ export default function CreateTodo(){
       setTimeout(() => {
         route.push('/todos')      
         dimissToast()
-      }, 2500);
+      }, 2000);
 
       return
-    } catch (error) {
-      notifyMe({message: 'Ops! Não conseguimos cadastrar, tente novamente', styleClass: 'warning', icon: '⚠️', position: 'top-center'})      
+    } catch (error: AxiosError | any) {
+      if(error instanceof AxiosError){
+        error?.response?.data.message
+        notifyMe({message: error?.response?.data.message, styleClass: 'warning', icon: '⚠️', position: 'top-center'})      
+      }
     }
   }
 

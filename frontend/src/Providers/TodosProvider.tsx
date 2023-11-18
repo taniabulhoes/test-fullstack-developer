@@ -1,6 +1,7 @@
 "use client";
 
 import ApiClient from "@/lib/ApiClient";
+import { format } from "date-fns";
 import { Dispatch, ReactNode, SetStateAction, createContext, useCallback, useEffect, useMemo, useState } from "react";
 
 
@@ -8,10 +9,11 @@ type TodosContextProviderProps = {
   children: ReactNode
 }
 
-type todosProps = {
+export type todosProps = {
   id: string;
   subject: string;
-  expected_date: string 
+  expected_date: string
+  checked?: number 
 }
 
 export type TodosContextDataProps = {

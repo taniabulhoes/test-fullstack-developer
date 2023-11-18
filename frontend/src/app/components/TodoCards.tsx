@@ -34,8 +34,8 @@ export default function TodoCards({item}: todoCardProps){
     route.push(`/todos/edit/${idTodo}`)
   }
 
-  var date = new Date(item.expected_date);
-  var formattedDate = format(date, "yyyy/MM/dd");
+  const date = new Date(item.expected_date);
+  const formattedDate = format(date, "yyyy/MM/dd");
 
   return (
     <>

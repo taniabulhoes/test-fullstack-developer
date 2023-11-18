@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { useToast } from "../hooks/useToast";
 import { api } from "@/lib/axios";
 import { useRouter } from "next/navigation";
+import { AxiosError } from "axios";
 
 export default function Register(){
   const route = useRouter()
@@ -60,11 +61,14 @@ export default function Register(){
       setTimeout(() => {
         route.push('/todos')      
         dimissToast()
-      }, 2500);
+      }, 2000);
 
       return
-    } catch (error) {
-      notifyMe({message: 'Ops! Não conseguimos cadastrar você, tente novamente', styleClass: 'warning', icon: '⚠️', position: 'top-center'})      
+    }catch (error: AxiosError | any) {
+      if(error instanceof AxiosError){
+        error?.response?.data.message
+        notifyMe({message: error?.response?.data.message, styleClass: 'warning', icon: '⚠️', position: 'top-center'})      
+      }
     }
   }
 

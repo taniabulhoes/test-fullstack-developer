@@ -15,11 +15,9 @@ export default function Todos(){
     fetchTodos(searchText)
   }
 
-
   useEffect(() => {
     fetchTodos()   
   }, [fetchTodos])
-
 
   return (
       <div className="">

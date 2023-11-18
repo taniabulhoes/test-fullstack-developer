@@ -5,11 +5,12 @@ type InputProps = {
   required: boolean
   label?: string,
   type: string,
-  placeholder?: string   
-  onChange: (...args: any) => string;
+  placeholder?: string
+  value: string | undefined
+  onChange: (...args: any) => void;
 }
 
-export default function FormInput ({name, required, type, label, placeholder, onChange}: InputProps) {
+export default function ComputedInput ({name, required, type, label, placeholder, value, onChange}: InputProps) {
   return (
     <div className="mb-4">
         {
@@ -24,9 +25,10 @@ export default function FormInput ({name, required, type, label, placeholder, on
         }
         <input 
           name={name} type={type} placeholder={placeholder}
+          value={value}
           className="w-full h-11 pl-4 text-sm text-texttodo bg-inputs outline-none border-none rounded-sm mt-3"
           onChange={onChange}
-        />      
+        /> 
     </div>
   )
 }
