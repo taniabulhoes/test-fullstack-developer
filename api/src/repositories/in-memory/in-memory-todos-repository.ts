@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import { CreateTodoInput, DeleteTodoInput, ITodosRepository, Todo, UpdateTodoInput } from "../i-todo-repository";
+import { CreateTodoInput, DeleteTodoInput, ITodosRepository, Metrics, Todo, UpdateTodoInput } from "../i-todo-repository";
 
 class InMemoryTodosRepository implements ITodosRepository{
 
@@ -38,6 +38,22 @@ class InMemoryTodosRepository implements ITodosRepository{
     return todos  
   }
 
+  async metrics(userId: string) {
+    const totalTodos = this.items.length
+
+    const totalConcludes = this.items.filter((todo) => {
+      if(todo.checked === 1){
+        return todo.checked
+      }
+    })
+
+    const metrics: Metrics = {      
+      total_todos: totalTodos,
+      total_conclude: totalConcludes.length
+    }
+
+    return metrics
+  }  
 
   async create(data: CreateTodoInput) {
     const todo = {

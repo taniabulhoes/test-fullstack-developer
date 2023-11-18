@@ -25,7 +25,7 @@ describe('Suite Test List Todos', () => {
       })
     }
 
-    const todos = await sut.execute({userId: user, query: 'Todo 1'})
+    const todos = await sut.execute({user_id: user, query: 'Todo 1'})
 
     expect(todos).toHaveLength(3)
   })

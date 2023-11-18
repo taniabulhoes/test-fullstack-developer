@@ -1,5 +1,5 @@
 import { prisma } from 'src/lib/prisma'
-import { CreateTodoInput, DeleteTodoInput, ITodosRepository, Todo, UpdateTodoInput } from '../i-todo-repository'
+import { CreateTodoInput, DeleteTodoInput, ITodosRepository, Metrics, Todo, UpdateTodoInput } from '../i-todo-repository'
 
 class PrismaTodosRepository implements ITodosRepository {
   async findById(id: string) {
@@ -41,6 +41,22 @@ class PrismaTodosRepository implements ITodosRepository {
     return todos
   }
  
+  async metrics(userId: string){
+    const totalTodos = await prisma.todo.count()
+    const totalConcludes = await prisma.todo.count({
+      where: {
+        checked: 1
+      }
+    })
+
+    const metrics: Metrics = {
+      total_todos: totalTodos,
+      total_conclude: totalConcludes
+    }
+
+    return metrics
+  }
+  
   async create(data: CreateTodoInput){
     const todo = await prisma.todo.create({
       data,

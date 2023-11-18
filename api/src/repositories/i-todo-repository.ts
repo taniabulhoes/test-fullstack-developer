@@ -26,10 +26,16 @@ export interface Todo{
   checked?: number
 }
 
+export interface Metrics{
+  total_conclude: number,
+  total_todos: number
+}
+
 export interface ITodosRepository {
   findById(id: string): Promise<Todo | null>,
   findBySubject(subject: string): Promise<Todo | null>
   list(userId: string, query?: string): Promise<Todo[]>
+  metrics(userId: string): Promise<Metrics>
   create(data: CreateTodoInput): Promise<Todo>,
   update(data: UpdateTodoInput): Promise<Todo>
   delete(data: DeleteTodoInput): Promise<null>

@@ -14,7 +14,7 @@ export async function listTodos(request: FastifyRequest, reply: FastifyReply){
 
   const todo = await listUseCase.execute({
     query: q,
-    userId: request.user.sub
+    user_id: request.user.sub
   })
 
   return reply.status(201).send({
