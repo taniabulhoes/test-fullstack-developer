@@ -25,7 +25,6 @@ export default function Todos(){
 
   return (
       <div className="">
-           <Loading/>
         <p className="text-texttodo md:text-4xl sm:text-3xl md:w-[100%] w-[100%] font-bold sm:pt-4 mb-14 text-center">Suas atividades</p>
         <div className="bg-todocard w-full p-4 rounded-sm mb-12 leading-3 justify-center items-center">
             <div className="flex">
