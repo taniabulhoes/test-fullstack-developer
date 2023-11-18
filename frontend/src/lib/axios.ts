@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = process.env.BASE_URL || "http://localhost:7777";
+const BASE_URL = process.env.BASE_URL || "https://taniatestpi.codens.com.br";
 
 export default axios.create({
   baseURL: BASE_URL,

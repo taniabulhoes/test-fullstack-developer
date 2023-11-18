@@ -20,6 +20,7 @@ type todoCardProps = {
 }
 
 export default function TodoCards({item}: todoCardProps){
+
   const [switchCheck, setSwitchCheck] = useState(item.checked ? true : false)
 
   const route = useRouter()
