@@ -20,19 +20,16 @@ export default function Login(props: Props){
   const password = useRef("");
 
   const handleSigIn = async () => {
-console.log('asd')
-    console.log(user.current, password.current)
-
 
     const res = await signIn("credentials", {
       username: user.current,
       password: password.current,
       redirect: false,
-      callbackUrl: 'https://test-fullstack-developer.vercel.app/todos'
+      callbackUrl: 'https://test-fullstack-developer.vercel.app/todo'
     });      
 
     if (!res?.error) {
-      router.push(props.callbackUrl ?? "https://test-fullstack-developer.vercel.app//todos");
+      router.push(props.callbackUrl ?? "https://test-fullstack-developer.vercel.app/todos");
       return;
     }    
 
