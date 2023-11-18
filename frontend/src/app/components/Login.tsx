@@ -22,16 +22,18 @@ export default function Login(props: Props){
   const handleSigIn = async () => {
 
 
+    console.log(user.current, password)
     const res = await signIn("credentials", {
       username: user.current,
       password: password.current,
-      redirect: false
+      redirect: false,
     });      
 
     if (!res?.error) {
-      router.push(props.callbackUrl ?? "https://test-fullstack-developer.vercel.app/todos");
+      router.push(props.callbackUrl ?? "http://localhost:3000/todos");
       return;
     }    
+
     
     if(!user.current || !password.current){
       notifyMe({message: 'Não é possível logar com usuário e senha vazios', styleClass: 'wrong', icon: '✖', position: 'top-center'})
