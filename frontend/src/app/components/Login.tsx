@@ -21,9 +21,6 @@ export default function Login(props: Props){
 
   const handleSigIn = async () => {
 
-
-    console.log(user.current, password.current)
-
     const res = await signIn("credentials", {
       username: user.current,
       password: password.current,

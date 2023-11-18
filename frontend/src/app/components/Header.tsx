@@ -9,7 +9,6 @@ import { nextAuthOptions } from "../api/auth/[...nextauth]/options"
 export default async function Header(){
   const session = await getServerSession(nextAuthOptions)
 
-  console.log(session)
 
   return (
   <>
