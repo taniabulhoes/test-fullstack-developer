@@ -25,14 +25,13 @@ export default function Login(props: Props){
     const res = await signIn("credentials", {
       username: user.current,
       password: password.current,
-      redirect: false,
+      redirect: false
     });      
 
     if (!res?.error) {
-      router.push(props.callbackUrl ?? "http://localhost:3000/todos");
+      router.push(props.callbackUrl ?? "/todos");
       return;
     }    
-
     
     if(!user.current || !password.current){
       notifyMe({message: 'Não é possível logar com usuário e senha vazios', styleClass: 'wrong', icon: '✖', position: 'top-center'})
