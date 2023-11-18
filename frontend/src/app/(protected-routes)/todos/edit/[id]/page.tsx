@@ -44,7 +44,6 @@ export default function EditTodo (){
 
         setTodo(response.data.todo)        
       } catch (error) {
-        console.log()
         setNonExistentTodo(true)
       }
     }, [setNonExistentTodo, id]
@@ -128,7 +127,7 @@ export default function EditTodo (){
           nonExistentTodo === false ?
           (
             <>
-                <p className="text-texttodo md:text-4xl sm:text-3xl md:w-[100%] w-[100%] font-bold sm:pt-10 mb-14 md:text-left sm:text-center">Editar</p>
+                <p className="text-texttodo md:text-4xl sm:text-3xl md:w-[100%] w-[100%] font-bold sm:pt-10 mb-14 text-center">Editar</p>
                 
                 <div className="flex items-center justify-end">
                   <p className="text-detail text-sm">Deletar atividade</p>

@@ -9,6 +9,8 @@ import { nextAuthOptions } from "../api/auth/[...nextauth]/options"
 export default async function Header(){
   const session = await getServerSession(nextAuthOptions)
 
+  console.log(session)
+
   return (
   <>
       <div className="bg-header flex items-center justify-between h-[120px]">

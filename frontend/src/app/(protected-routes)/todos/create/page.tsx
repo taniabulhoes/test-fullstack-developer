@@ -88,7 +88,7 @@ export default function CreateTodo(){
         md:max-w-[100%]
         md:min-w-min
       ">
-        <p className="text-texttodo md:text-4xl sm:text-3xl md:w-[100%] w-[100%] font-bold sm:pt-10 mb-14 md:text-left sm:text-center">Cadastro de atividades</p>
+        <p className="text-texttodo md:text-4xl sm:text-3xl md:w-[100%] w-[100%] font-bold sm:pt-10 mb-14 text-center">Cadastro de atividades</p>
 
         <FormInput
           label="Atividade"

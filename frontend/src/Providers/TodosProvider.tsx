@@ -1,7 +1,6 @@
 "use client";
 
 import ApiClient from "@/lib/ApiClient";
-import { format } from "date-fns";
 import { Dispatch, ReactNode, SetStateAction, createContext, useCallback, useEffect, useMemo, useState } from "react";
 
 
@@ -23,8 +22,9 @@ export type TodosContextDataProps = {
   search: string,
   setActivityToBeDeleted: Dispatch<SetStateAction<string>>,
   activityToBeDeleted: string,
-  removeTodo: (id: string) => void
-  swithTodo: (id: string) => void
+  removeTodo: (id: string) => void,
+  swithTodo: (id: string) => void,
+  emptyList: string
 }
 
 export const TodosContext = createContext({} as TodosContextDataProps)
@@ -33,9 +33,12 @@ export function TodosContextProvider({children}: TodosContextProviderProps){
   const [todos, setTodos] = useState<todosProps[]>([])
   const [search, setSearch] = useState<string>('')
   const [activityToBeDeleted, setActivityToBeDeleted] = useState<string>('')
+  const [emptyList, setEmptyList] = useState('full')
 
   const fetchTodos = useCallback(
     async (searchText?: string) => {
+      setEmptyList('loading')
+
       const response = await ApiClient.get('/todos', {
         params: {
           q: searchText || ''
@@ -44,7 +47,14 @@ export function TodosContextProvider({children}: TodosContextProviderProps){
   
       const {todo} = response.data
   
-      setTodos(todo) 
+      if(todo.length > 0){
+        setTodos(todo)
+        setEmptyList('full')  
+      }
+
+      if(todo.length === 0){
+        setEmptyList('empty')
+      }
     },
     []
   );
@@ -79,7 +89,8 @@ export function TodosContextProvider({children}: TodosContextProviderProps){
       setActivityToBeDeleted,
       activityToBeDeleted,
       removeTodo,
-      swithTodo
+      swithTodo,
+      emptyList
     }),
     [
       fetchTodos,
@@ -89,7 +100,8 @@ export function TodosContextProvider({children}: TodosContextProviderProps){
       setActivityToBeDeleted,
       activityToBeDeleted,
       removeTodo,
-      swithTodo
+      swithTodo,
+      emptyList      
     ]
   );
 

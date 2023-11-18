@@ -2,9 +2,12 @@ import { NextAuthOptions } from "next-auth";
 import { JWT, decode, encode } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+const BASE_URL = process.env.BASE_URL || "http://localhost:7777";
+
+
 async function refreshToken(token: JWT): Promise<JWT>{
 
-  const res = await fetch("http://localhost:7777/token/refresh", {
+  const res = await fetch(`${BASE_URL}/token/refresh`, {
     method: "PATCH",
     headers: {
         Authorization: `Bearer ${token.refreshToken}` 
@@ -43,9 +46,12 @@ const nextAuthOptions: NextAuthOptions = {
 
       async authorize(credentials, req) {
 
+
+        console.log(credentials)
+
         if (!credentials?.username || !credentials?.password) return null;
 
-        const response = await fetch("http://localhost:7777/sessions", {
+        const response = await fetch(`${BASE_URL}/sessions`, {
           method: "POST",
           headers: {
               "Content-Type": "application/json",

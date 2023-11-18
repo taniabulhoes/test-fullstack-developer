@@ -84,7 +84,6 @@ export default function Register(){
       <div className="
         flex
         flex-col	
-        md:flex  h-[80vh]
         sm:mx-8
         rounded-sm
         p-8
@@ -95,7 +94,7 @@ export default function Register(){
         md:max-w-[50%]
         md:min-w-min
       ">
-        <p className="text-texttodo md:text-4xl sm:text-3xl md:w-[100%] w-[100%] font-bold sm:pt-10 mb-14 md:text-left sm:text-center">Crie sua conta para acessar a <span className="text-detail">Todo List</span></p>
+        <p className="text-texttodo md:text-4xl sm:text-3xl md:w-[100%] w-[100%] font-bold sm:pt-10 mb-14 text-center">Crie sua conta para acessar a <span className="text-detail">Todo List</span></p>
 
         <FormInput
           label="Nome"
