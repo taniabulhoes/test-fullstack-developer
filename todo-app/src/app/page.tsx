@@ -1,7 +1,18 @@
+"use client";
+
+// import { useAppContext } from '../context';
+
 export default function Home() {
+  // const {user} = useAppContext();
   return (
-    <main>
-      <h1>LOGIN PAGE</h1>
-    </main>
+    <>
+      <header>
+        <div>TESTE TANIA BULHÕES</div>
+      </header>
+      <main>
+        <h1>LOGIN</h1>
+      </main>
+    </>
+    
   );
 }
