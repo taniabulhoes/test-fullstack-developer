@@ -20,10 +20,9 @@ export default function Home() {
     const { success, data } = await loginUser(username, password);
 
     if (success) {
-      login(data);
-      console.log(data);
-      // Save token or perform other actions on successful login
-      router.push('/task-list'); // Redirect to dashboard or any other page
+      login(data.token);
+
+      router.push('/task-list');
     } else {
       setError('Invalid username or password, please try again');
     }

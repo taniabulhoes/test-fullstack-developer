@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const AppContext = createContext<ContextProps | undefined>(undefined);
 
@@ -9,16 +9,25 @@ export function AppWrapper({children} : {
 
   const [user, setUser] = useState<UserProps | null>(null);
 
-  const login = (userData: UserProps) => {
-    // Implement your login logic here
-    // Set the user data and JWT token in the context
+  useEffect(() => {
+    const storedToken = localStorage.getItem('jwtToken');
+    if (storedToken) {
+      const userFromToken = decodeToken(storedToken);
+      setUser(userFromToken);
+    }
+  }, []);
+
+
+  const login = (token: string) => {
+    const userData = decodeToken(token);
     setUser(userData);
+
+    localStorage.setItem('jwtToken', token);
   };
 
   const logout = () => {
-    // Implement your logout logic here
-    // Clear user data and JWT token
     setUser(null);
+    localStorage.removeItem('jwtToken');
   };
 
   return (
@@ -26,7 +35,6 @@ export function AppWrapper({children} : {
       user,
       login,
       logout
-      // setUser: (newUser: User) => setUser(newUser)
     }}>
       {children}
     </AppContext.Provider>
@@ -38,5 +46,16 @@ export default function useAuth(): ContextProps {
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
+  
   return context;
+};
+
+const decodeToken = (token: string): any => {
+  const {id, name, email} = JSON.parse(atob(token.split('.')[1]));
+
+  return {
+    id,
+    name,
+    email
+  };
 };

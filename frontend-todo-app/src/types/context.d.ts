@@ -4,3 +4,7 @@ interface ContextProps {
   login: (userData: User) => void;
   logout: () => void;
 }
+
+interface ServerResponseProps {
+  
+}

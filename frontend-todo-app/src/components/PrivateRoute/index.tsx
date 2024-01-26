@@ -1,14 +1,17 @@
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useAuth from '../../context';
 import NotAuthorizedAlert from '../NotAuthorizedAlert';
 
 export default function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
   const router = useRouter();
+  const [notAuthorized, setNotAuthorized] = useState<boolean>(false)
 
   useEffect(() => {
     if (!user) {
+      setNotAuthorized(true);
+
       const redirectToLogin = () => {
         router.push('/');
       };
@@ -17,9 +20,10 @@ export default function PrivateRoute({ children }: { children: React.ReactNode }
 
       return () => clearTimeout(redirectTimer);
     }
+    setNotAuthorized(false)
   }, [user, router]);
 
-  if (!user) {
+  if (notAuthorized) {
     return <NotAuthorizedAlert />;
   }
 
