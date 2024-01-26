@@ -1,20 +1,35 @@
 "use client";
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { loginUser } from '../services/userApi';
 import '../styles/styles.scss';
 
 // import { useAppContext } from '../context';
 
 export default function Home() {
+  const router = useRouter();
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-
+  
   // const {user} = useAppContext();
+  
+  const handleLogin = async (e: any) => {
+    e.preventDefault();
 
-  const handleLogin = () => {
-    console.log("Fetch to login")
-  }
+    const { success, data, error } = await loginUser(username, password);
+
+    if (success) {
+      console.log('Login successful');
+      console.log(data);
+      // Save token or perform other actions on successful login
+      router.push('/task-list'); // Redirect to dashboard or any other page
+    } else {
+      console.error('Login failed:', error);
+    }
+  };
+
   return (
     <main>
       <h1>Login</h1>
