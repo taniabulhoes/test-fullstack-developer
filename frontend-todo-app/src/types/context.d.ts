@@ -1,8 +1,8 @@
 interface ContextProps {
-  user: User | null
-  // setUser: (user: User) => void
-  login: (userData: User) => void;
+  user: UserProps | null
+  login: (token: string) => void;
   logout: () => void;
+  tasks: any
 }
 
 interface ServerResponseProps {

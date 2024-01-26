@@ -1,9 +1,9 @@
 const db = require('../db');
 
 class TaskModel {
-  static async createTask(userId, title, content) {
+  static async createTask(userId, title) {
     try {
-      const task = await db.one('INSERT INTO tasks (user_id, title, content) VALUES ($1, $2, $3) RETURNING *', [userId, title, content]);
+      const task = await db.one('INSERT INTO tasks (user_id, title, content) VALUES ($1, $2, $3) RETURNING *', [userId, title]);
       return task;
 
     } catch (error) {
@@ -30,9 +30,9 @@ class TaskModel {
     }
   }
 
-  static async editTask(taskId, newTitle, newContent, userId) {
+  static async editTask(taskId, newTitle, userId) {
     try {
-      const updatedTask = await db.oneOrNone('UPDATE tasks SET title = $2, content = $3 WHERE id = $1 AND user_id = $4 RETURNING *', [taskId, newTitle, newContent, userId]);
+      const updatedTask = await db.oneOrNone('UPDATE tasks SET title = $2, content = $3 WHERE id = $1 AND user_id = $4 RETURNING *', [taskId, newTitle, userId]);
       return updatedTask;
     } catch (error) {
       throw new Error('Error editing task: ' + error.message);

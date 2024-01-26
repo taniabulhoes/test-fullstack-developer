@@ -1,10 +1,8 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:2000/api/users';
-
-const loginUser = async (username, password) => {
+const loginUser = async (username, password) => {  
   try {
-    const response = await axios.post(`${API_URL}/login`, { userName: username, password });
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users/login`, { userName: username, password });
 
     if (response.status === 200) {
       return { success: true, data: response.data };

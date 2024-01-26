@@ -1,5 +1,6 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from 'react';
+import { userTasks } from '../services/tasksApi.js';
 
 const AppContext = createContext<ContextProps | undefined>(undefined);
 
@@ -8,21 +9,44 @@ export function AppWrapper({children} : {
 }) {
 
   const [user, setUser] = useState<UserProps | null>(null);
+  const [tasks, setTasks] = useState<TasksProps | null>(null);
 
+  const loadUserTasks = async (userId: number, token: string) => {
+    if(userId && token) {
+      const { data } = await userTasks(userId, token);
+      return data
+    }
+  }
+  
+  
   useEffect(() => {
+    
     const storedToken = localStorage.getItem('jwtToken');
     if (storedToken) {
       const userFromToken = decodeToken(storedToken);
       setUser(userFromToken);
+
+      const fetchContextTasksData = async () => {
+        const returnedTasks = await loadUserTasks(userFromToken.id, storedToken)
+        setTasks(returnedTasks);
+      };
+
+      fetchContextTasksData();
     }
+    
   }, []);
 
-
-  const login = (token: string) => {
+  const login = async (token: string) => {
+    
     const userData = decodeToken(token);
     setUser(userData);
+    
+    const returnedTasks = await loadUserTasks(userData?.id, token);
+
+    setTasks(returnedTasks)
 
     localStorage.setItem('jwtToken', token);
+    
   };
 
   const logout = () => {
@@ -34,7 +58,8 @@ export function AppWrapper({children} : {
     <AppContext.Provider value={{
       user,
       login,
-      logout
+      logout,
+      tasks
     }}>
       {children}
     </AppContext.Provider>
@@ -50,7 +75,7 @@ export default function useAuth(): ContextProps {
   return context;
 };
 
-const decodeToken = (token: string): any => {
+const decodeToken = (token: string): UserProps => {
   const {id, name, email} = JSON.parse(atob(token.split('.')[1]));
 
   return {

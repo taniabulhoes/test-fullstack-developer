@@ -25,6 +25,10 @@ export default function Home() {
       router.push('/task-list');
     } else {
       setError('Invalid username or password, please try again');
+
+      setTimeout(() => {
+        setError(null)
+      }, 1500);
     }
   };
 

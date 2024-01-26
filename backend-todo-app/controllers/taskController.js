@@ -2,10 +2,10 @@ const TaskModel = require('../models/taskModel');
 
 class TaskController {
   static async createTask(req, res) {
-    const { userId, title, content } = req.body;
+    const { userId, title } = req.body;
 
     try {
-      const task = await TaskModel.createTask(userId, title, content);
+      const task = await TaskModel.createTask(userId, title);
       res.status(201).json({ message: 'Task created successfully', task });
     } catch (error) {
       console.error('Error creating task:', error);
@@ -14,7 +14,7 @@ class TaskController {
   }
 
   static async getTasksByUser(req, res) {
-    const { userId } = req.body;
+    const { userId } = req.query;
 
     try {
       const tasks = await TaskModel.getTasksByUserId(userId);
@@ -24,6 +24,7 @@ class TaskController {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   }
+
   static async deleteTask(req, res) {
     const { taskId, userId } = req.body;
 
