@@ -1,5 +1,6 @@
 "use client";
 
+import Image from 'next/image';
 import Loading from '../../components/Loading';
 import PrivateRoute from '../../components/PrivateRoute';
 import useAuth from '../../context';
@@ -7,7 +8,13 @@ import useAuth from '../../context';
 export default function TaskList() {
   const { tasks } = useAuth();
 
-  console.log(tasks)
+  function handleEditTask(task: any) {
+    console.log("editing task")
+  }
+
+  function handleDeleteTask(task: any) {
+    console.log("deleting task")
+  }
 
   if(!tasks) {
     return (
@@ -23,7 +30,25 @@ export default function TaskList() {
         {tasks.length > 0 ? (
           <ol>
             {tasks.map((task: any) => (
-              <li key={task.id}>{task.title}</li>
+              <div key={task.id}>
+                <li>{task.title}</li>
+                <a onClick={handleEditTask}>
+                  <Image
+                    src="/icons/EditIcon.svg"
+                    alt="Edit Task Button"
+                    width={24}
+                    height={24}
+                  />
+                </a>
+                <a onClick={handleDeleteTask}>
+                  <Image
+                    src="/icons/DeleteIcon.svg"
+                    alt="Delete Task Button"
+                    width={24}
+                    height={24}
+                  />
+                </a>
+              </div>
             ))}
           </ol>
         ) : (
