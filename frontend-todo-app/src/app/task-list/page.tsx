@@ -9,8 +9,9 @@ import useAuth from '../../context';
 import { deleteTask } from '../../services/tasksApi.js';
 
 export default function TaskList() {
-  const { tasks, localStorageToken } = useAuth();
+  const { tasks, localStorageToken, user } = useAuth();
   const [editTaskModalOpen, setEditTaskModalOpen] = useState<number>(0)
+  const [newTaskModalOpen, setNewTaskModalOpen] = useState<boolean>(false)
 
   async function handleDeleteTask(taskId: number, userId: number, token: string) {
     await deleteTask(taskId, userId, token);
@@ -36,7 +37,12 @@ export default function TaskList() {
     <PrivateRoute>
       {localStorageToken &&
         <main>
-          <Header />
+          <Header 
+            userId={user?.id}
+            newTaskModalOpen={newTaskModalOpen}
+            setNewTaskModalOpen={setNewTaskModalOpen}
+            token={localStorageToken}
+          />
           {tasks && tasks.length > 0 ? (
             <ol>
               {tasks?.map((task: TasksProps) => (
