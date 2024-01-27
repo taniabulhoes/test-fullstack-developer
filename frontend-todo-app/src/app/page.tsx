@@ -14,7 +14,7 @@ export default function Home() {
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   
-  const handleLogin = async (e: any) => {
+  const handleLogin = async (e: React.SyntheticEvent) => {
     e.preventDefault();
 
     const { success, data } = await loginUser(username, password);

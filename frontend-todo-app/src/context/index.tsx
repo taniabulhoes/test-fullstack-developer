@@ -9,7 +9,8 @@ export function AppWrapper({children} : {
 }) {
 
   const [user, setUser] = useState<UserProps | null>(null);
-  const [tasks, setTasks] = useState<TasksProps | null>(null);
+  const [tasks, setTasks] = useState<TasksProps[] | null>(null);
+  const [localStorageToken, setLocalStorageToken] = useState<string | null>(null);
 
   const loadUserTasks = async (userId: number, token: string) => {
     if(userId && token) {
@@ -20,9 +21,10 @@ export function AppWrapper({children} : {
   
   
   useEffect(() => {
-    
     const storedToken = localStorage.getItem('jwtToken');
+
     if (storedToken) {
+      setLocalStorageToken(storedToken)
       const userFromToken = decodeToken(storedToken);
       setUser(userFromToken);
 
@@ -32,6 +34,7 @@ export function AppWrapper({children} : {
       };
 
       fetchContextTasksData();
+
     }
     
   }, []);
@@ -46,6 +49,7 @@ export function AppWrapper({children} : {
     setTasks(returnedTasks)
 
     localStorage.setItem('jwtToken', token);
+    setLocalStorageToken(token)
     
   };
 
@@ -59,7 +63,8 @@ export function AppWrapper({children} : {
       user,
       login,
       logout,
-      tasks
+      tasks,
+      localStorageToken
     }}>
       {children}
     </AppContext.Provider>

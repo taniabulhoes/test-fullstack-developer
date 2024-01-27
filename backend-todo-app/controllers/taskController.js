@@ -42,10 +42,10 @@ class TaskController {
   }
 
   static async editTask(req, res) {
-    const { taskId, newTitle, newContent, userId } = req.body;
+    const { taskId, newTitle, userId } = req.body;
 
     try {
-      const updatedTask = await TaskModel.editTask(taskId, newTitle, newContent, userId);
+      const updatedTask = await TaskModel.editTask(taskId, newTitle, userId);
       
       if (updatedTask) {
         res.status(200).json({ message: 'Task edited successfully', updatedTask });
