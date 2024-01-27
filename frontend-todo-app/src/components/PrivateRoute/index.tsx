@@ -4,21 +4,25 @@ import useAuth from '../../context';
 import NotAuthorizedAlert from '../NotAuthorizedAlert';
 
 export default function PrivateRoute({ children }: { children: React.ReactNode }) {
-  const { user } = useAuth();
+  const { loadTasksError } = useAuth();
   const router = useRouter();
   const [notAuthorized, setNotAuthorized] = useState<boolean>(false)
 
-  useEffect(() => {
-    if (!user) {
+  useEffect(() => {    
+    console.log(loadTasksError)
+    if (!loadTasksError) return; 
+    
+    if (loadTasksError){
       setNotAuthorized(true);
 
       setTimeout(() => {
         router.push('/');
-      }, 1000);
+      }, 1500);
+      return;
 
     }
     setNotAuthorized(false)
-  }, [user, router]);
+  }, [loadTasksError]);
 
   if (notAuthorized) {
     return <NotAuthorizedAlert />;

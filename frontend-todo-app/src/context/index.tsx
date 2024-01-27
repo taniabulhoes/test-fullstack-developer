@@ -11,14 +11,19 @@ export function AppWrapper({children} : {
   const [user, setUser] = useState<UserProps | null>(null);
   const [tasks, setTasks] = useState<TasksProps[] | null>(null);
   const [localStorageToken, setLocalStorageToken] = useState<string | null>(null);
+  const [loadTasksError, setLoadTasksError] = useState<string | null>(null);
+  
 
   const loadUserTasks = async (userId: number, token: string) => {
-    if(userId && token) {
-      const { data, success, error } = await userTasks(userId, token);
-      console.log(success)
-      console.log(error)
-      return data
+    const { data, error } = await userTasks(userId, token);
+    if (data) {
+      setTasks(data);
+      return
     }
+    if (error) {
+      setLoadTasksError(error.error)
+    }
+
   }
   
   useEffect(() => {
@@ -30,8 +35,12 @@ export function AppWrapper({children} : {
       setUser(userFromToken);
 
       const fetchContextTasksData = async () => {
-        const returnedTasks = await loadUserTasks(userFromToken.id, storedToken)
-        setTasks(returnedTasks);
+        try {
+          await loadUserTasks(userFromToken.id, storedToken);
+
+        } catch (error) {
+          console.error("Error fetching tasks:", error);
+        }
       };
 
       fetchContextTasksData();
@@ -45,9 +54,7 @@ export function AppWrapper({children} : {
     const userData = decodeToken(token);
     setUser(userData);
     
-    const returnedTasks = await loadUserTasks(userData?.id, token);
-
-    setTasks(returnedTasks)
+    await loadUserTasks(userData?.id, token);
 
     localStorage.setItem('jwtToken', token);
     setLocalStorageToken(token)
@@ -65,7 +72,8 @@ export function AppWrapper({children} : {
       login,
       logout,
       tasks,
-      localStorageToken
+      localStorageToken,
+      loadTasksError
     }}>
       {children}
     </AppContext.Provider>

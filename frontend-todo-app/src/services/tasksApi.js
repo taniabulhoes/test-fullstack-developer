@@ -13,7 +13,7 @@ const userTasks = async (userId, token) => {
         },
       }
     );
-    console.log("entrei aqui")
+
     if (response.status === 200) {
       return { success: true, data: response.data };
     } else {
@@ -21,7 +21,7 @@ const userTasks = async (userId, token) => {
     }
   } catch (error) {
     console.error('Error during userTasks request:', error);
-    return { success: false, error: 'Internal Server Error' };
+    return { success: false, error: error.response.data };
   }
 };
 
@@ -44,7 +44,7 @@ const createTask = async (userId, title, token) => {
     }
   } catch (error) {
     console.error('Error during createTask request:', error);
-    return { success: false, error: 'Internal Server Error' };
+    return { success: false, error: error.response.data };
   }
 };
 
@@ -68,7 +68,7 @@ const editTask = async (taskId, newTitle, userId, token) => {
     }
   } catch (error) {
     console.error('Error during editTask request:', error);
-    return { success: false, error: 'Internal Server Error' };
+    return { success: false, error: error.response.data };
   }
 };
 
@@ -91,7 +91,7 @@ const deleteTask = async (taskId, userId, token) => {
     }
   } catch (error) {
     console.error('Error during deleteTask request:', error);
-    return { success: false, error: 'Internal Server Error' };
+    return { success: false, error: error.response.data };
   }
 };
 
