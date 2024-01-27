@@ -9,10 +9,11 @@ export default function PrivateRoute({ children }: { children: React.ReactNode }
   const [notAuthorized, setNotAuthorized] = useState<boolean>(false)
 
   useEffect(() => {    
-    console.log(loadTasksError)
-    if (!loadTasksError) return; 
+    // if (!loadTasksError) return; 
+    const storedToken = localStorage.getItem('jwtToken');
+    console.log("storedToken", storedToken)
     
-    if (loadTasksError){
+    if (loadTasksError || !storedToken){
       setNotAuthorized(true);
 
       setTimeout(() => {
