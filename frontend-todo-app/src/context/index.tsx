@@ -14,7 +14,9 @@ export function AppWrapper({children} : {
 
   const loadUserTasks = async (userId: number, token: string) => {
     if(userId && token) {
-      const { data } = await userTasks(userId, token);
+      const { data, success, error } = await userTasks(userId, token);
+      console.log(success)
+      console.log(error)
       return data
     }
   }

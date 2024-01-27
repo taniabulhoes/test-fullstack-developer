@@ -13,7 +13,7 @@ const userTasks = async (userId, token) => {
         },
       }
     );
-
+    console.log("entrei aqui")
     if (response.status === 200) {
       return { success: true, data: response.data };
     } else {

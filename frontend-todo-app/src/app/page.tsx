@@ -41,7 +41,7 @@ export default function Home() {
         
         <form onSubmit={handleLogin} className="loginPage__formContainer formulary" >
           <label className="formulary__label">
-            <h3 className="formulary__title">Username:</h3>          
+            <h3 className="formulary__title">Username:</h3>
             <input autoComplete="off" className="formulary__input" placeholder='Ex: Jonas' type="text" name="name" value={username} onChange={(e) => setUsername(e.target.value)} />
           </label>
           <label className="formulary__label">
