@@ -44,28 +44,30 @@ export default function TaskList() {
             token={localStorageToken}
           />
           {tasks && tasks.length > 0 ? (
-            <ol>
+            <ol className="taskList__container">
               {tasks?.map((task: TasksProps) => (
-                <div key={task.id} className="task__container">
-                  <div>
-                    <li>{task.title}</li>
-                    <a onClick={() => handleEditTask(task.id)}>
-                      <Image
-                        src="/icons/EditIcon.svg"
-                        alt="Edit Task Button"
-                        width={16}
-                        height={16}
-                      />
-                    </a>
-                    <a onClick={() => handleDeleteTask(task.id, task.user_id, localStorageToken)}>
-                      <Image
-                        src="/icons/DeleteIcon.svg"
-                        alt="Delete Task Button"
-                        width={16}
-                        height={16}
-                      />
-                    </a>
-                  </div>
+                <div key={task.id} className="taskList__item_container">
+                  <div className="taskList__item">
+                    <li className="taskList__item_title">{task.title}</li>
+                    <div className="taskList__item_buttonsContainer">
+                      <a onClick={() => handleEditTask(task.id)}>
+                        <Image
+                          src="/icons/EditIcon.svg"
+                          alt="Edit Task Button"
+                          width={16}
+                          height={16}
+                        />
+                      </a>
+                      <a onClick={() => handleDeleteTask(task.id, task.user_id, localStorageToken)}>
+                        <Image
+                          src="/icons/DeleteIcon.svg"
+                          alt="Delete Task Button"
+                          width={16}
+                          height={16}
+                        />
+                      </a>
+                    </div>
+                  </div >
                     <EditTaskModal
                       editTaskModalOpen={editTaskModalOpen}
                       setEditTaskModalOpen={setEditTaskModalOpen}

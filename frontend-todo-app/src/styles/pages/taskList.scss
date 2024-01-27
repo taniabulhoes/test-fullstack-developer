@@ -1,3 +1,17 @@
-.task__container {
-  position: relative;
+.taskList__container {
+  margin: 24px 0px 24px 16px;
+}
+.taskList__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.taskList__item_title {
+  color: $text-normal;
+  font-size: 14px;
+}
+.taskList__item_buttonsContainer {
+  a {
+    margin: 0 4px;
+  }
 }
