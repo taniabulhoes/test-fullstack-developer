@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import EditTaskModal from '../../components/EditTaskModal';
-import Header from '../../components/Header';
 import PrivateRoute from '../../components/PrivateRoute';
+import TaskListHeader from '../../components/TaskListHeader';
 import useAuth from '../../context';
 import { deleteTask } from '../../services/tasksApi.js';
 
@@ -36,8 +36,8 @@ export default function TaskList() {
   return (
     <PrivateRoute>
       {localStorageToken &&
-        <main>
-          <Header 
+        <main className="formulary__container">
+          <TaskListHeader 
             userId={user?.id}
             newTaskModalOpen={newTaskModalOpen}
             setNewTaskModalOpen={setNewTaskModalOpen}
@@ -53,16 +53,16 @@ export default function TaskList() {
                       <Image
                         src="/icons/EditIcon.svg"
                         alt="Edit Task Button"
-                        width={24}
-                        height={24}
+                        width={16}
+                        height={16}
                       />
                     </a>
                     <a onClick={() => handleDeleteTask(task.id, task.user_id, localStorageToken)}>
                       <Image
                         src="/icons/DeleteIcon.svg"
                         alt="Delete Task Button"
-                        width={24}
-                        height={24}
+                        width={16}
+                        height={16}
                       />
                     </a>
                   </div>
