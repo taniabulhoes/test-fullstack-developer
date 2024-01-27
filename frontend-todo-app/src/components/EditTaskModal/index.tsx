@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useState } from 'react';
 import { editTask } from '../../services/tasksApi';
 
@@ -24,12 +25,19 @@ export default function EditTaskModal({
 
   return (
     <div className={`${editTaskModalOpen === taskId ? 'editTask__container_opened' : 'editTask__container'}`}>
-      <form onSubmit={handleEditTask}>
-        <label>
-          New title:
-          <input type="text" value={taskNewTitle} onChange={(e) => setTaskNewTitle(e.target.value)} />
+      <form className="editTask__formulary" onSubmit={handleEditTask}>
+        <label className="editTask__label">
+          <h6>New title:</h6>          
+          <input type="text" value={taskNewTitle} placeholder="Write a new title" onChange={(e) => setTaskNewTitle(e.target.value)} />
         </label>
-        <button type="submit">Edit Task</button>
+        <button type="submit">
+          <Image
+            src="/icons/ConfirmIcon.svg"
+            alt="Confirm Edit Icon"
+            width={22}
+            height={22}
+          />
+        </button>
       </form>
     </div>
   );
