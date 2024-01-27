@@ -19,7 +19,6 @@ export function AppWrapper({children} : {
     }
   }
   
-  
   useEffect(() => {
     const storedToken = localStorage.getItem('jwtToken');
 

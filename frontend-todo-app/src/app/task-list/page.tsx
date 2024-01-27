@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import EditTaskModal from '../../components/EditTaskModal';
+import Header from '../../components/Header';
 import PrivateRoute from '../../components/PrivateRoute';
 import useAuth from '../../context';
 import { deleteTask } from '../../services/tasksApi.js';
@@ -35,7 +36,7 @@ export default function TaskList() {
     <PrivateRoute>
       {localStorageToken &&
         <main>
-          <h1>Task List</h1>
+          <Header />
           {tasks && tasks.length > 0 ? (
             <ol>
               {tasks?.map((task: TasksProps) => (
