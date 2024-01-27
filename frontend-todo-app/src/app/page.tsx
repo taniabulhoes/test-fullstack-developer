@@ -11,14 +11,14 @@ import '../styles/styles.scss';
 export default function Home() {
   const router = useRouter();
   const { login } = useAuth();
-  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   
   const handleLogin = async (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    const { success, data } = await loginUser(username, password);
+    const { success, data } = await loginUser(email, password);
 
     if (success) {
       login(data.token);
@@ -42,8 +42,8 @@ export default function Home() {
         
         <form onSubmit={handleLogin} className="loginPage__formContainer formulary" >
           <label className="formulary__label">
-            <h3 className="formulary__title">Username:</h3>
-            <input autoComplete="off" className="formulary__input" placeholder='Ex: Jonas' type="text" name="name" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <h3 className="formulary__title">Email:</h3>
+            <input autoComplete="off" className="formulary__input" placeholder='Ex: email@email.com' type="email" name="name" value={email} onChange={(e) => setEmail(e.target.value)} />
           </label>
           <label className="formulary__label">
             <h3 className="formulary__title">Password:</h3>          
