@@ -30,8 +30,8 @@ export default function NewUserForm(){
       }, 1500);
       return
     }
-    if(newUserEmail.length === 0) {
-      setError("Please enter a email");
+    if(newUserEmail.length === 0 || !isValidEmail(newUserEmail)) {
+      setError("Please enter a valid email");
       setTimeout(() => {
         setError(null)  
       }, 1500);
@@ -54,6 +54,11 @@ export default function NewUserForm(){
       router.push("/");
     }, 1500);
 
+  }
+
+  function isValidEmail(email: string): boolean {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
   }
 
   return (
