@@ -51,7 +51,7 @@ export default function Home() {
       </form>
       <div>
         <h4>Don't have account?</h4>
-        <Link href={''}><h4>Sign up</h4></Link>
+        <Link href={'/new-user-form'}><h4>Sign up</h4></Link>
 
       </div>
 
