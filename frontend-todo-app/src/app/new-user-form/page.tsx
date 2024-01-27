@@ -13,25 +13,30 @@ export default function NewUserForm(){
   }
 
   return (
-    <main>
-      <form onSubmit={handleCreateNewUser}>
-        <label>
-          User Name
-          <input type="text" value={newUserName} onChange={(e) => setNewUserName(e.target.value)} />
-        </label>
-        <br/>
-        <label>
-          User Email
-          <input type="text" value={newUserEmail} onChange={(e) => setNewUserEmail(e.target.value)} />
-        </label>
-        <br/>
-        <label>
-          User Password
-          <input type="text" value={newUserPassword} onChange={(e) => setNewUserPassword(e.target.value)} />
-        </label>
-        <button type="submit">Register</button>
-      </form>
-      <a href='/'>Back to Login</a>
-    </main>
+    <>
+      <main className="formulary__container">
+        <h1 className="formulary__container_title">Sign Up</h1>
+        <form onSubmit={handleCreateNewUser}>
+          <label className='formulary__label'>
+            <h3 className="formulary__title">Username:</h3>  
+            <input className="formulary__input" type="text" value={newUserName} onChange={(e) => setNewUserName(e.target.value)} />
+          </label>
+          <br/>
+          <label>
+            <h3 className="formulary__title">Email:</h3>  
+            <input className="formulary__input" type="text" value={newUserEmail} onChange={(e) => setNewUserEmail(e.target.value)} />
+          </label>
+          <br/>
+          <label>
+            <h3 className="formulary__title">Password:</h3>
+            <input className="formulary__input" type="text" value={newUserPassword} onChange={(e) => setNewUserPassword(e.target.value)} />
+          </label>
+          <div className="newUser__buttons_container">
+            <button className="formulary__button" type="submit">Register</button>
+            <a className="formulary__button" href='/' type="button" >Login</a>
+          </div>
+        </form>
+      </main>
+    </>
   )
 }

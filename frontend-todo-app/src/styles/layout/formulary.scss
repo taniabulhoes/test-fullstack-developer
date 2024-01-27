@@ -1,8 +1,24 @@
+.formulary__container_title {
+  font-size: 36px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-top: 32px;
+  color: $text-title;
+}
+.formulary__container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $border;
+  border-radius: 8px;
+  margin: 24px 12px 4px;
+  padding: 20px;
+  background: $background-greenlight;
+}
 .formulary__label {
   margin-bottom: 10px;
 }
-
 .formulary__title {
+  letter-spacing: 1px;
   margin: 10px 0 8px 18px;
   font-size: 18px;
   font-weight: 700;
@@ -30,8 +46,11 @@
   padding: 0 20px;
   text-transform: uppercase;
   font-weight: 700;
+  font-size: 16px;
   border-radius: 4px;
   margin: 15px 16px 0 auto;
   color: $text-title;
   border: 1px solid $border;
+  background: $background-offwhite;
+  letter-spacing: 1px;
 }
