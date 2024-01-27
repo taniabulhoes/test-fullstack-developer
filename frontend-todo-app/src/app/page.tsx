@@ -37,7 +37,7 @@ export default function Home() {
       <main className="formulary__container">
         <h1 className="formulary__container_title">Sign In</h1>
 
-        {error && <div>{error}</div>}
+        {error && <div className="alert alert__error">{error}</div>}
         
         <form onSubmit={handleLogin} className="loginPage__formContainer formulary" >
           <label className="formulary__label">
