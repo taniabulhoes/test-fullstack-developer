@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import CustomAlert from '../components/CustomAlert';
 import useAuth from '../context';
 import { loginUser } from '../services/userApi';
 import '../styles/styles.scss';
@@ -37,7 +38,7 @@ export default function Home() {
       <main className="formulary__container">
         <h1 className="formulary__container_title">Sign In</h1>
 
-        {error && <div className="alert alert__error">{error}</div>}
+        {error && <CustomAlert message={error} type="error"/> }
         
         <form onSubmit={handleLogin} className="loginPage__formContainer formulary" >
           <label className="formulary__label">

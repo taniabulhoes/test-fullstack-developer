@@ -26,13 +26,6 @@ export default function TaskList() {
     }
   }
 
-  // if(!tasks) {
-  //   return (
-  //   <PrivateRoute>
-  //     <Loading />
-  //   </PrivateRoute>
-  // )};
-
   return (
     <PrivateRoute>
       {localStorageToken &&

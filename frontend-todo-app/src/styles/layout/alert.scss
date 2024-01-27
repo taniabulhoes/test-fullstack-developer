@@ -13,4 +13,8 @@
     background: $alert-red;
     color: $text-white;
   }
+  &__success {
+    background: $alert-green;
+    color: $text-white;
+  }
 }

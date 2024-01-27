@@ -12,13 +12,10 @@ export default function PrivateRoute({ children }: { children: React.ReactNode }
     if (!user) {
       setNotAuthorized(true);
 
-      const redirectToLogin = () => {
+      setTimeout(() => {
         router.push('/');
-      };
+      }, 1000);
 
-      const redirectTimer = setTimeout(redirectToLogin, 1000);
-
-      return () => clearTimeout(redirectTimer);
     }
     setNotAuthorized(false)
   }, [user, router]);

@@ -30,7 +30,7 @@ const registerUser = async ( userName, password, userEmail ) => {
     }
   } catch (error) {
     console.error('Error during user registration:', error);
-    return { success: false, error: 'Internal Server Error' };
+    return { success: false, error: error.response.data};
   }
 };
 
