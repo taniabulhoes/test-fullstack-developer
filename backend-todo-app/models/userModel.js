@@ -1,12 +1,12 @@
 const db = require('../db');
 
 class UserModel {
-  static async getUserByEmail(userEmail) {
+  static async getUserByEmail(email) {
     try {
-      const foundedEmail = await db.any('SELECT email FROM users WHERE email = $1', [userEmail]);
+      const foundedEmail = await db.oneOrNone('SELECT * FROM users WHERE email = $1', [email]);
 
-      if (foundedEmail.length > 0) {
-        return foundedEmail[0].email;
+      if (foundedEmail) {
+        return foundedEmail;
       } else {
         return null;
       }
