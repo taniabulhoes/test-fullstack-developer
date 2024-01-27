@@ -1,0 +1,31 @@
+.loginPage__title {
+  font-size: 36px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-top: 32px;
+  color: $text-title;
+}
+.loginPage__formContainer {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $border;
+  border-radius: 8px;
+  margin: 24px 12px 4px;
+  padding: 20px;
+  background: $background-greenlight;
+}
+.loginPage__newUser {
+  display: flex;
+  justify-content: right;
+  font-size: 12px;
+  margin: 0 18px;
+  color: $text-normal;
+  text-decoration: none;
+
+  &_signUp {
+      color: $text-title;
+      margin-left: 5px;
+      text-decoration: underline;
+
+  }
+}

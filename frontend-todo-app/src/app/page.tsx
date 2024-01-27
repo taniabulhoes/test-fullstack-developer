@@ -33,27 +33,26 @@ export default function Home() {
   };
 
   return (
-    <main>
-      <h1>Login</h1>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-      <form onSubmit={handleLogin}>
-        <label>
-          Username:
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </label>
-        <br />
-        <button type="submit">Login</button>
-      </form>
-      <div>
-        <h4>Don't have account?</h4>
-        <Link href={'/new-user-form'}><h4>Sign up</h4></Link>
+    <main className="loginPage__container">
+      <h1 className="loginPage__title">Sign In</h1>
 
-      </div>
+      {error && <div>{error}</div>}
+      
+      <form onSubmit={handleLogin} className="loginPage__formContainer formulary" >
+        <label className="formulary__label">
+          <h3 className="formulary__title">Username:</h3>          
+          <input autoComplete="off" className="formulary__input" placeholder='Ex: Jonas' type="text" name="name" value={username} onChange={(e) => setUsername(e.target.value)} />
+        </label>
+        <label className="formulary__label">
+          <h3 className="formulary__title">Password:</h3>          
+          <input autoComplete="new-password" className="formulary__input" type="password" placeholder='Ex: 1@YsxxU' value={password} onChange={(e) => setPassword(e.target.value)} />
+        </label>
+        <button className="formulary__button" type="submit">Login</button>
+      </form>
+      <Link href={'/new-user-form'} className='loginPage__newUser'>
+        <h4>Don't have account?</h4>
+        <h4 className='loginPage__newUser_signUp'>Sign up</h4>
+      </Link>
 
     </main>
   );

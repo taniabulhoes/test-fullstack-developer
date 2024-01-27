@@ -2,10 +2,14 @@
 @import "./configs/variables.scss";
 @import "./configs/global.scss";
 
+// Custom layouts
+@import "./layout/formulary.scss";
+
 // Components Styles
-@import "./components//notAuthorizedAlert.scss";
+@import "./components/notAuthorizedAlert.scss";
 @import "./components/editTaskModal.scss";
 @import "./components/createNewTaskModal.scss";
 
 // Pages Styles
 @import "./pages/taskList.scss";
+@import "./pages/home.scss";

@@ -3,7 +3,7 @@ import { Roboto } from "next/font/google";
 import { AppWrapper } from '../context';
 import "../styles/styles.scss";
 
-const roboto = Roboto({ weight: "400", subsets: ["latin"] });
+const roboto = Roboto({ weight: ['300', '400', '500', '700'], subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "To Do App",
