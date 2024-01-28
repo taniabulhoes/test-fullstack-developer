@@ -9,7 +9,8 @@ export const metadata: Metadata = {
   title: "To Do App",
   description: "Created by Stefano Branz for Tania Bulhões FullStack test",
   icons: {
-    icon: '../../public/favicon.ico',
+    icon: '/favicon.ico',
+    href: '/favicon.ico',
   },
 };
 
