@@ -1,7 +1,7 @@
 const pgp = require('pg-promise')();
 
 const cn = {
-  host: 'localhost', // server name or IP address;
+  host: 'test-fullstack-developer-server.onrender.com',
   port: 5433,
   database: 'ToDoDB',
   user: 'postgres',
