@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import CustomAlert from '../../components/CustomAlert';
 import EditTaskModal from '../../components/EditTaskModal';
 import PrivateRoute from '../../components/PrivateRoute';
 import TaskListHeader from '../../components/TaskListHeader';
@@ -12,9 +13,29 @@ export default function TaskList() {
   const { tasks, localStorageToken, user } = useAuth();
   const [editTaskModalOpen, setEditTaskModalOpen] = useState<number>(0)
   const [newTaskModalOpen, setNewTaskModalOpen] = useState<boolean>(false)
+  const [alert, setAlert] = useState<string | null>(null);
+  const [alertType, setAlertType] = useState<string | null>(null);
 
   async function handleDeleteTask(taskId: number, userId: number, token: string) {
-    await deleteTask(taskId, userId, token);
+    const {success} = await deleteTask(taskId, userId, token);
+
+    if (success) {
+      setAlert("Your task has been deleted nsucessfully")
+      setAlertType("success")
+      setTimeout(() => {
+        setAlert(null)
+        setAlertType(null)
+      }, 1500);
+    } else {
+      setAlert("Something went wrong deleting the task, please try again")
+      setAlertType("error")
+
+      setTimeout(() => {
+        setAlert(null)
+        setAlertType(null)
+      }, 1500);
+    }
+
     window.location.reload();
   }
 
@@ -31,6 +52,7 @@ export default function TaskList() {
     <PrivateRoute>
       {localStorageToken &&
         <main className="formulary__container">
+          {alert && alertType && <CustomAlert message={alert} type={alertType}/> }
           <TaskListHeader 
             userId={user?.id}
             newTaskModalOpen={newTaskModalOpen}
