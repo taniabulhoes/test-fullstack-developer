@@ -40,10 +40,10 @@ export default function Home() {
 
         {error && <CustomAlert message={error} type="error"/> }
         
-        <form onSubmit={handleLogin} className="loginPage__formContainer formulary" >
+        <form autoComplete="off" onSubmit={handleLogin} className="loginPage__formContainer formulary" >
           <label className="formulary__label">
             <h3 className="formulary__title">Email:</h3>
-            <input autoComplete="off" className="formulary__input" placeholder='Ex: email@email.com' type="email" name="name" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input autoComplete="new-password" className="formulary__input" placeholder='Ex: email@email.com' type="email" name="name" value={email} onChange={(e) => setEmail(e.target.value)} />
           </label>
           <label className="formulary__label">
             <h3 className="formulary__title">Password:</h3>          

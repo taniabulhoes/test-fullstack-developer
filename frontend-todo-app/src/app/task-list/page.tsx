@@ -15,6 +15,7 @@ export default function TaskList() {
 
   async function handleDeleteTask(taskId: number, userId: number, token: string) {
     await deleteTask(taskId, userId, token);
+    window.location.reload();
   }
 
   function handleEditTask(taskId: number) {

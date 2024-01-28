@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { createTask } from '../../services/tasksApi';
+import CustomAlert from '../CustomAlert';
 
 export default function CreateNewTaskModal({
     userId,
@@ -8,11 +9,16 @@ export default function CreateNewTaskModal({
     token
   } : CreateNewTaskProps) {
   const [newTaskTitle, setNewTaskTitle] = useState<string>('')
+  const [error, setError] = useState<string | null>(null);
   
   async function handleCreateNewTask(e: React.SyntheticEvent) {
     e.preventDefault();
 
     if (newTaskTitle.length === 0) {
+      setError('Please insert a new task title');
+      setTimeout(() => {
+        setError(null)
+      }, 1500);
       return setNewTaskModalOpen(true)
     }
 
@@ -23,6 +29,7 @@ export default function CreateNewTaskModal({
   
   return (
     <main className={`${newTaskModalOpen ? 'newTask__container_opened' : 'newTask__container'} formulary__container`}>
+      {error && <CustomAlert message={error} type="error"/> }
       <h1 className="formulary__container_title">Create a new task</h1>
       <form className="formulary" onSubmit={handleCreateNewTask}>
         <label className="formulary__label">
