@@ -63,7 +63,7 @@ export default function TaskList() {
             setNewTaskModalOpen={setNewTaskModalOpen}
             token={localStorageToken}
           />
-          <div>
+          <div className='taskList__searchTasks_container'>
             <input
               type="text"
               placeholder="Search tasks by title..."
