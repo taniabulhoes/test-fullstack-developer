@@ -3,12 +3,14 @@
 
   &_opened {
     display: block;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 24px;
+    left: 10px;
+    right: 10px;
     height: 90vh;
     position: fixed;
     z-index: 3;
+    max-width: 980px;
+    margin: auto;
 
     .formulary__input {
       margin-top: 36px;
