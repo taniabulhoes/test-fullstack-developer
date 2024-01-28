@@ -1,19 +1,19 @@
 .newUser__buttons_container {
   display: flex;
   align-items: center;
+  max-width: 400px;
+  margin: auto;
 
   a {
-    height: 38px;
+    height: 40px;
     display: flex;
     align-items: center;
     max-height: 40px;
-    margin-right: 16px;
     width: 100%;
     justify-content: center;
     text-decoration: none;
   }
   button {
-    margin-left: 16px;
     width: 100%;
   }
 }

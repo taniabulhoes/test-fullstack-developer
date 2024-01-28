@@ -72,13 +72,11 @@ export default function NewUserForm(){
             <h3 className="formulary__title">Username:</h3>  
             <input className="formulary__input" placeholder="Ex: Maria" type="text" value={newUserName} onChange={(e) => setNewUserName(e.target.value)} />
           </label>
-          <br/>
-          <label>
+          <label className='formulary__label'>
             <h3 className="formulary__title">Email:</h3>  
             <input className="formulary__input" placeholder="Ex: example@gmail.com" type="text" value={newUserEmail} onChange={(e) => setNewUserEmail(e.target.value)} />
           </label>
-          <br/>
-          <label>
+          <label className='formulary__label'>
             <h3 className="formulary__title">Password:</h3>
             <input className="formulary__input" placeholder="Ex: 1#ssf@" autoComplete="new-password" type="password" value={newUserPassword} onChange={(e) => setNewUserPassword(e.target.value)} />
           </label>

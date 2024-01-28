@@ -15,18 +15,21 @@
   background: $background-greenlight;
 }
 .formulary__label {
-  margin-bottom: 10px;
+  display: block;
+  max-width: 400px;
+  margin: 0 auto 10px auto;
+  width: 100%;
 }
 .formulary__title {
   letter-spacing: 1px;
-  margin: 10px 0 8px 18px;
+  margin: 10px 0 8px 0px;
   font-size: 18px;
   font-weight: 700;
   color: $text-title;
   text-align: left;
-  @media (min-width: 768px) {
-    text-align: center;
-  }
+  // @media (min-width: 768px) {
+  //   text-align: center;
+  // }
 }
 .formulary__input {
   height: 40px;
@@ -36,14 +39,11 @@
   font-size: 14px;
   font-weight: 400;
   color: $text-normal;
-  min-width: 250px;
+  max-width: 400px;
+  width: 100%;
 
   &::placeholder {
     color: $text-normal;
-  }
-
-  @media (max-width: 340px) {
-    min-width: 200px;
   }
 }
 
@@ -55,7 +55,7 @@
   font-weight: 700;
   font-size: 16px;
   border-radius: 4px;
-  margin: 15px 16px 0 auto;
+  margin: 15px 0px 0 auto;
   color: $text-title;
   border: 1px solid $border;
   background: $background-offwhite;
