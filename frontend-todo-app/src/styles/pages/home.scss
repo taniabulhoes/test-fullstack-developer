@@ -10,6 +10,13 @@
       color: $text-title;
       margin-left: 5px;
       text-decoration: underline;
+  }
+}
 
+.loginPage__formContainer {
+  display: flex;
+  flex-direction: column;
+  @media(min-width: 768px) {
+    margin-top: 20px;
   }
 }

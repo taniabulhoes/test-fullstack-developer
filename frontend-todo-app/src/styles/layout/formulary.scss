@@ -24,6 +24,9 @@
   font-weight: 700;
   color: $text-title;
   text-align: left;
+  @media (min-width: 768px) {
+    text-align: center;
+  }
 }
 .formulary__input {
   height: 40px;
@@ -37,6 +40,10 @@
 
   &::placeholder {
     color: $text-normal;
+  }
+
+  @media (max-width: 340px) {
+    min-width: 200px;
   }
 }
 
@@ -53,4 +60,8 @@
   border: 1px solid $border;
   background: $background-offwhite;
   letter-spacing: 1px;
+  
+  @media (min-width: 768px) {
+    margin-right: auto;
+  }
 }
