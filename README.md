@@ -1,79 +1,292 @@
 [![Tania Bulhoes Logo](https://images.squarespace-cdn.com/content/v1/625f0af3cbf96235f8de8b4a/539097a0-548d-4a84-a5fa-6cbbad1964a0/Tania_bulhoes_Logo_Horizontal_Positivo_RGB.png?format=1500w)](https://tbi.taniabulhoes.com.br/)
 
->- Todos os interessados que fizerem Pull Request (a partir de um fork deste repositório) receberão um feedback da Tania Bulhões.
->- Essa prova consiste em testar seus conhecimentos em desenvolvimento de fullstack web applications
->- Estamos priorizando desenvolvedores com experiência na stack NodeJS + React, portanto no momento não avaliaremos PRs em que o Dev entregue uma solução que utiliza uma stack diferente para desenvolvê-la.
+<h1 align="center">
+    TETE FULL STACK DEVELOPER
+</h1>
 
-### Requisitos
-- [React](https://reactjs.org/docs/getting-started.html)
-- NodeJS
-- SQL Database (Postgres, Mysql, MariaDB)
-- Utilizar Typescript
-- Arquitetura MVC para a API
-- Repositório Github
-- Instruções no README.md do repositório para rodar a aplicação de forma local
+<h4 align="center"> 
+	STEFANO BRANZ
+</h4>
 
-## Como participar?
-1. Faça um fork deste repositório (https://docs.github.com/en/get-started/quickstart/fork-a-repo)
-4. Após finalizar a prova, crie um Pull Request do fork para a `main` deste repositório, para ser analisado por nós. :D (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork)
-5. Na descrição do PR, deixe qualquer diretiva necessária para rodar o projeto (Comandos para rodar a aplicação, testes, etc), bem como dependências (banco de dados, etc) localmente.
-6. Caso tenha dificuldades com qualquer etapa deste processo, nos acione que ficaremos felizes em lhe ajudar (contatos descritos no final deste página)
+<p align="center">
+ <a href="#-sobre-o-projeto">Sobre</a> •
+ <a href="#-funcionalidades">Funcionalidades</a> •
+ <a href="#-layout">Layout</a> • 
+ <a href="#-como-executar-o-projeto">Como executar</a> • 
+ <a href="#-tecnologias">Tecnologias</a> •
+ <a href="#-licença">Licença</a>
+</p>
 
-## Detalhes da prova
-A prova consiste em criar uma aplicação web simples de **To Do List (Lista de tarefas)**.
 
-Sinta-se à vontade para utilizar quaisquer libs que desejar (Axios, Dio, TypeORM, Sequelize, etc).
+## 💻 Sobre o projeto
+<div id="-sobre-o-projeto"></div>
 
-O software deve ser dividido em 3 camadas isoladas:
->
->**- Banco de dados:**
->  - Deve ser relacional e só pode ser acessado a partir do backend, nunca diretamente da camada de frontend
->
->**- Backend:**
- > - Deve se comunicar com o banco de dados e expor os recursos necessários para a camada de frontend através de endpoints de uma REST API.
->
->**- Frontend:**
- > - Deve se comunicar com o backend através da API desenvolvida e entregar a experiência do software ao usuário.
+Esse é um projeto de To Do List, criado para o processo seletivo da Tania Bulhões.
 
-A aplicação deve conter no mínimo 4 telas, sendo 3 delas privadas e 1 pública. Sendo elas:
-  - Tela de Login **(Pública)**
-  - Tela de Listagem de Tarefas **(Privada)**
-    - Nesta tela devemos ser capazes de excluir uma tarefa
-  - Tela de Cadastro de uma Nova Tarefa **(Privada)**
-  - Tela de Edição de uma Nova Tarefa **(Privada)**
-    - Nesta tela devemos ser capazes de excluir uma tarefa
+O projeto consiste em um aplicativo com login e autorização para poder acessar a lista de tarefas, podendo editar, deletar ou até mesmo criar novas tarefas para determinado usuário.
 
-### Funcionalidades
-Deve conter no app as seguintes funcionalidades:
 
-1. Listagem de tarefas
-2. Criação de nova tarefa
-3. Edição e exclusão de tarefa
-4. Exibir alerta de confirmação de exclusão
-5. Exibir Toaster feedbacks para erros que acontecerem na aplicação
-6. Utilizar alguma estrutura para gerenciamento de estado global da aplicação (Context API, Redux, Hooks, etc)
-8. OAuth via JWT token no fluxo de login do usuário
-9. Autenticação JWT token em todos os endpoints privados da API
+---
 
-*Obs.: Sinta-se livre para implementar o estilo visual que preferir, utilizando qualquer framework css de sua preferência (styles-components, ant, material, bootstrap, etc). Avaliaremos apenas se a experiência de navegação do usuário está simples, objetiva e fluida*
+## ⚙️ Funcionalidades
+<div id="-funcionalidades"></div>
 
-### Desejáveis
-- Utilizar [NextJS](https://nextjs.org/) para o desenvolvimeto do frontend da aplicação
-- Tela de cadastro de usuário com os seguintes campos:
-  - Nome
-  - E-mail
-  - Senha
-- Campo de busca de tarefas (por título) na tela de listagem
-- Testes unitários
-- Link hospedado para homologação (Pode ser um preview da Vercel, caso utilize o NextJS como framework para desenvolvimento)
+- [x] Listagem de tarefas
+- [x] Criação de nova tarefa
+- [x] Edição e exclusão de tarefa
+- [x] Exibir alerta de confirmação de exclusão
+- [x] Exibir Toaster feedbacks para erros que acontecerem na aplicação
+- [x] Utilizar alguma estrutura para gerenciamento de estado global da aplicação (Context API, Redux, Hooks, etc)
+- [x] OAuth via JWT token no fluxo de login do usuário
+- [x] Autenticação JWT token em todos os endpoints privados da API
 
-### Diretivas importantes:
-- Todos os dados devem ser salvos em um banco de dados relacional de sua escolha.
-- As telas privadas só podem ser acessadas na aplicação após login.
 
-## Dúvidas?
-> caua.rezende@taniabulhoes.com.br <br>
-> Company Presentation: https://tbi.taniabulhoes.com.br/ <br>
-> Ecommerce: https://www.taniabulhoes.com.br/ <br>
+  <b>Desejáveis:<b>
+  - [x]Utilizar NextJS para o desenvolvimeto do frontend da aplicação
+  - [x]Tela de cadastro de usuário com os seguintes campos:
+    - Nome
+    - E-mail
+    - Senha
+  - [x] Campo de busca de tarefas (por título) na tela de listagem
+  - [] Testes unitários
+  - [x] Link hospedado para homologação (Pode ser um preview da Vercel, caso utilize o NextJS como framework para desenvolvimento)
+  - [x] Todos os dados devem ser salvos em um banco de dados relacional de sua escolha.
+  - [x] As telas privadas só podem ser acessadas na aplicação após login.
 
-### Desde já agradecemos seu interesse em fazer parte do time TB e boa sorte! ;)
+---
+
+## 🎨 Layout
+<div id="-layout"></div>
+
+### Mobile
+
+<p>
+  <img alt="Tania Bulhões" title="#Tania Bulhões" src="./assets/sign-in-mobile.png" width="200px">
+
+  <img alt="Tania Bulhões" title="#Tania Bulhões" src="./assets/sign-up-mobile.png" width="200px">
+
+  <img alt="Tania Bulhões" title="#Tania Bulhões" src="./assets/task-list-mobile.png" width="200px">
+
+  <img alt="Tania Bulhões" title="#Tania Bulhões" src="./assets/new-task-mobile.png" width="200px">
+</p>
+
+### Web
+
+<p>
+  <img alt="Tania Bulhões" title="#Tania Bulhões" src="./assets/sign-in-desktop.png" width="400px">
+
+  <img alt="Tania Bulhões" title="#Tania Bulhões" src="./assets/sign-up-desktop.png" width="400px">
+
+  <img alt="Tania Bulhões" title="#Tania Bulhões" src="./assets/task-list-desktop.png" width="400px">
+
+  <img alt="Tania Bulhões" title="#Tania Bulhões" src="./assets/new-task-desktop.png" width="400px">
+</p>
+
+---
+
+## 🚀 Como executar o projeto
+<div id="-como-executar-o-projeto"></div>
+
+Este projeto é divido em três partes:
+1. Backend (pasta backend-todo-app) 
+2. Frontend (pasta frontend-todo-app)
+3. Banco de dados
+
+💡O Frontend precisa que o Backend esteja sendo executado para funcionar.
+
+### Pré-requisitos
+
+#### Rodando o Backend (Backend)
+OBS: caso queira pode acessar o servidor remoto. Porém o banco de dados precisar rodar localmente, com variáveis de ambiente correspondentes.
+[SERVIDOR](https://test-fullstack-developer-server.onrender.com)
+
+```bash
+
+# Vá para a pasta do backend
+$ cd backend-todo-app
+
+# Instale as dependências
+$ npm install
+
+# Configure .env
+$ na raiz do projeto crie um arquivo .env com os seguintes dados:
+$DATABASE_URL=URL BANDO DE DADOS
+$JWT_SECRET=SEGREDO JWT TOKEN
+$PORT=PORTA SERVIDOR
+$POSTGRES_PORT=PORTA BANCO DE DADOS
+$POSTGRES_DATABASE_NAME=NOME DO BANDO DE DADOS
+$POSTGRES_USER=USUÁRIO BANDO DE DADOS
+$POSTGRES_PASSWORD=SENHA BANDO DE DADOS
+
+# Execute a aplicação
+$ node server.js
+
+# O servidor inciará na porta:2000 - acesse http://localhost:2000/api/status para checar o funcionamento. 
+
+```
+
+```bash
+# cURL's API Postman
+## LOGIN USUÁRIO::
+curl --location 'http://localhost:2000/api/users/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "userEmail": "User email",
+    "password": "User password"
+}'
+
+## CRIAR NOVO USUÁRIO: 
+curl --location 'http://localhost:2000/api/users/register' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "userName": "User name",
+    "password": "User password",
+    "userEmail": "User email"
+}'
+
+## CRIAR NOVO USUÁRIO: 
+curl --location 'http://localhost:2000/api/users/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "userEmail": "User email",
+    "password": "User password"
+}'
+
+## LISTAR TAREFAS: 
+curl --location 'http://localhost:2000/api/tasks/user-tasks?userId={User ID}' \
+--header 'Authorization: JWT TOKEN' \
+--data ''
+
+## CRIAR TAREFA: 
+curl --location 'http://localhost:2000/api/tasks/create' \
+--header 'Authorization: JWT TOKEN' \
+--header 'Content-Type: application/json' \
+--data '{
+    "userId": "User ID",
+    "title": "Título da tarefa"
+}'
+
+## EDITAR TAREFA: 
+curl --location --request PUT 'http://localhost:2000/api/tasks/edit' \
+--header 'Content-Type: application/json' \
+--data '{
+    "taskId": "ID Tarefa",
+    "newTitle": "Novo Título",
+    "userId": "ID Usuário"
+}'
+
+## DELETAR TAREFA: 
+curl --location --request DELETE 'http://localhost:2000/api/tasks/delete' \
+--header 'Content-Type: application/json' \
+--data '{
+    "taskId": "ID Tarefa",
+    "userId": "ID usuário"
+}'
+
+
+```
+
+
+#### Rodando a aplicação web (Frontend)
+OBS: Caso queira pode acessar o site remoto. Porém o banco de dados precisar rodar localmente, com variáveis de ambiente correspondentes.
+[FRONTEND](https://test-fullstack-developer-ng0ifs8ix-stefano020.vercel.app/)
+
+```bash
+
+# Vá para a pasta da aplicação Front End
+$ cd frontend-todo-app
+
+# Instale as dependências
+$ npm install
+
+# Configure .env
+$ na raiz do projeto crie um arquivo .env com o seguinte dado:
+$NEXT_PUBLIC_API_URL=URL SERVIDOR/api
+
+# Execute a aplicação em modo de desenvolvimento
+$ npm run dev
+
+# A aplicação será aberta na porta:3000 - acesse http://localhost:3000
+
+```
+
+#### Baixando banco de dados (PostgreSQL 16)
+
+```bash
+# baixe o postgreSQL no site oficial https://www.postgresql.org/
+
+# Crie uma tabela com um nome de sua escolha, mas lembre de colocar o nome correto no .env do servidor.
+
+# Crie uma tabela chamada "users" e crie as colunas:
+$ CREATE TABLE IF NOT EXISTS public.users
+(
+    id integer NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+    name character varying(40) COLLATE pg_catalog."default" NOT NULL,
+    email text COLLATE pg_catalog."default" NOT NULL,
+    password character(8) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT users_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.users
+    OWNER to postgres;
+
+# Crie uma tabela chamada "tasks" e crie as colunas:
+$ CREATE TABLE IF NOT EXISTS public.tasks
+(
+    id integer NOT NULL DEFAULT nextval('tasks_id_seq'::regclass),
+    title text COLLATE pg_catalog."default" NOT NULL,
+    user_id integer NOT NULL,
+    CONSTRAINT tasks_pkey PRIMARY KEY (id),
+    CONSTRAINT user_id FOREIGN KEY (user_id)
+        REFERENCES public.users (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.tasks
+    OWNER to postgres;
+
+```
+
+---
+
+## 🛠 Tecnologias
+<div id="-tecnologias"></div>
+
+As seguintes ferramentas foram usadas na construção do projeto:
+
+#### **Website**  ([React](https://reactjs.org/)  +  [TypeScript](https://www.typescriptlang.org/) + [TypeScript](https://nextjs.org/))
+
+-   **[Axios](https://github.com/axios/axios)**
+
+-   **[jsonwebtoken](https://jwt.io/introduction)**
+
+
+#### **Server**  ([NodeJS](https://nodejs.org/en/))
+
+-   **[Express](https://expressjs.com/)**
+
+-   **[CORS](https://expressjs.com/en/resources/middleware/cors.html)**
+
+-   **[dotENV](https://www.dotenv.org/)**
+
+-   **[jsonwebtoken](https://jwt.io/introduction)**
+
+-   **[pg-promise](https://github.com/vitaly-t/pg-promise)**
+
+- **[postgreSQL](https://www.postgresql.org/)**
+
+---
+
+## 📝 Licença
+<div id="-licença"></div>
+
+Este projeto esta sobe a licença [MIT](./LICENSE).
+
+Feito  por Stefano Branz [Entre em contato!](https://www.linkedin.com/in/stefano-branz/)
+
+---
