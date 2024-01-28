@@ -15,6 +15,10 @@ export default function TaskList() {
   const [newTaskModalOpen, setNewTaskModalOpen] = useState<boolean>(false)
   const [alert, setAlert] = useState<string | null>(null);
   const [alertType, setAlertType] = useState<string | null>(null);
+  const [searchTitle, setSearchTitle] = useState<string>('');
+  const filteredTasks = tasks?.filter(task =>
+    task.title.toLowerCase().includes(searchTitle.toLowerCase())
+  );
 
   async function handleDeleteTask(taskId: number, userId: number, token: string) {
     const {success} = await deleteTask(taskId, userId, token);
@@ -59,9 +63,17 @@ export default function TaskList() {
             setNewTaskModalOpen={setNewTaskModalOpen}
             token={localStorageToken}
           />
-          {tasks && tasks.length > 0 ? (
+          <div>
+            <input
+              type="text"
+              placeholder="Search tasks by title..."
+              onChange={(e) => setSearchTitle(e.target.value)}
+              className='formulary__input'
+            />
+          </div>
+          {filteredTasks && filteredTasks.length > 0 ? (
             <ol className="taskList__container">
-              {tasks?.map((task: TasksProps) => (
+              {filteredTasks?.map((task: TasksProps) => (
                 <div key={task.id} className="taskList__item_container">
                   <div className="taskList__item">
                     <li className="taskList__item_title">{task.title}</li>
@@ -95,7 +107,7 @@ export default function TaskList() {
               ))}
             </ol>
           ) : (
-            <p>No tasks available.</p>
+            <p className='taskList__noTasks'>No tasks available.</p>
           )}
         </main>
       }
