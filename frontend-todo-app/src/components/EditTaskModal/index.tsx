@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { editTask } from '../../services/tasksApi';
+import handleChangeInput from '../../utils/handleChangeInput';
 import CustomAlert from '../CustomAlert';
 
 export default function EditTaskModal({
@@ -10,13 +11,13 @@ export default function EditTaskModal({
     userId,
     token,
   } : EditTaskModalProps) {
-  const [taskNewTitle, setTaskNewTitle] = useState<string>('');
+  const [taskNewTitle, setTaskNewTitle] = useState<NewTaskProps>({title: ''});
   const [error, setError] = useState<string | null>(null);
 
   const handleEditTask = async (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    if(taskNewTitle.length === 0){
+    if(taskNewTitle.title.length === 0){
       setError('Please insert a new task title');
       setTimeout(() => {
         setError(null)
@@ -24,7 +25,7 @@ export default function EditTaskModal({
       return
     }
 
-    const { success } = await editTask(taskId, taskNewTitle, userId, token);
+    const { success } = await editTask(taskId, taskNewTitle.title, userId, token);
 
     if (success) {
       setEditTaskModalOpen(0)
@@ -44,8 +45,14 @@ export default function EditTaskModal({
       {error && <CustomAlert message={error} type="error"/>}
       <form className="editTask__formulary" onSubmit={handleEditTask}>
         <label className="editTask__label">
-          <h6>New title:</h6>          
-          <input type="text" value={taskNewTitle} placeholder="Write a new title" onChange={(e) => setTaskNewTitle(e.target.value)} />
+          <h6>New title:</h6>
+          <input
+            type="text"
+            name='title'
+            value={taskNewTitle.title}
+            placeholder="Write a new title"
+            onChange={(e) => handleChangeInput(e, setTaskNewTitle)}
+          />
         </label>
         <button type="submit">
           <Image

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { createTask } from '../../services/tasksApi';
+import handleChangeInput from '../../utils/handleChangeInput';
 import CustomAlert from '../CustomAlert';
 
 export default function CreateNewTaskModal({
@@ -8,13 +9,13 @@ export default function CreateNewTaskModal({
     setNewTaskModalOpen,
     token
   } : CreateNewTaskProps) {
-  const [newTaskTitle, setNewTaskTitle] = useState<string>('')
+  const [newTaskTitle, setNewTaskTitle] = useState<NewTaskProps>({title: ''})
   const [error, setError] = useState<string | null>(null);
   
   async function handleCreateNewTask(e: React.SyntheticEvent) {
     e.preventDefault();
 
-    if (newTaskTitle.length === 0) {
+    if (newTaskTitle.title.length === 0) {
       setError('Please insert a new task title');
       setTimeout(() => {
         setError(null)
@@ -22,7 +23,7 @@ export default function CreateNewTaskModal({
       return setNewTaskModalOpen(true)
     }
 
-    await createTask(userId, newTaskTitle, token )
+    await createTask(userId, newTaskTitle.title, token )
     setNewTaskModalOpen(false)
     window.location.reload();
   }
@@ -33,7 +34,14 @@ export default function CreateNewTaskModal({
       <h1 className="formulary__container_title">Create a new task</h1>
       <form className="formulary" onSubmit={handleCreateNewTask}>
         <label className="formulary__label">
-          <input className="formulary__input" placeholder='Type a new task' type="text" value={newTaskTitle} onChange={(e) => setNewTaskTitle(e.target.value)} />
+          <input
+            className="formulary__input"
+            name='title'
+            placeholder='Type a new task'
+            type="text"
+            value={newTaskTitle.title}
+            onChange={(e) => handleChangeInput(e, setNewTaskTitle)}
+          />
         </label>
         <div>
           <button className="formulary__button" type="submit">Create</button>

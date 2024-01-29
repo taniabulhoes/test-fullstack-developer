@@ -7,16 +7,17 @@ import CustomAlert from '../components/CustomAlert';
 import useAuth from '../context';
 import { loginUser } from '../services/userApi';
 import '../styles/styles.scss';
+import handleChangeInput from '../utils/handleChangeInput';
 
 export default function Home() {
   const router = useRouter();
   const { login } = useAuth();
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [userLogin, setUserLogin] = useState<UserLoginProps>({email: '', password: ''})
   const [error, setError] = useState<string | null>(null);
   
   const handleLogin = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    const {email, password} = userLogin;
 
     const { success, data } = await loginUser(email, password);
 
@@ -43,11 +44,27 @@ export default function Home() {
         <form autoComplete="off" onSubmit={handleLogin} className="loginPage__formContainer formulary" >
           <label className="formulary__label">
             <h3 className="formulary__title">Email:</h3>
-            <input autoComplete="new-password" className="formulary__input" placeholder='Ex: email@email.com' type="email" name="name" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input
+              autoComplete="new-password"
+              className="formulary__input"
+              placeholder='Ex: email@email.com'
+              type="email"
+              name="email"
+              value={userLogin.email}
+              onChange={(e) => handleChangeInput(e, setUserLogin)}
+            />
           </label>
           <label className="formulary__label">
             <h3 className="formulary__title">Password:</h3>          
-            <input autoComplete="new-password" className="formulary__input" type="password" placeholder='Ex: 1@YsxxU' value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input
+              autoComplete="new-password"
+              className="formulary__input"
+              type="password"
+              name="password"
+              placeholder='Ex: 1@YsxxU'
+              value={userLogin.password}
+              onChange={(e) => handleChangeInput(e, setUserLogin)}
+            />
           </label>
           <button className="formulary__button" type="submit">Login</button>
         </form>

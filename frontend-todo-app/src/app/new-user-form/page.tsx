@@ -4,41 +4,27 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import CustomAlert from '../../components/CustomAlert';
 import { registerUser } from '../../services/userApi';
+import handleChangeInput from '../../utils/handleChangeInput';
 
 export default function NewUserForm(){
   const router = useRouter();
-  const [newUserName, setNewUserName] = useState<string>('')
-  const [newUserEmail, setNewUserEmail] = useState<string>('')
-  const [newUserPassword, setNewUserPassword] = useState<string>('')
+  const [newUser, setNewUser] = useState({name: '', email: '', password: ''})
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
   async function handleCreateNewUser(e: React.SyntheticEvent) {
     e.preventDefault();
+    const {name, email, password} = newUser;
 
-    if(newUserName.length === 0) {
+    if(name.length === 0 || email.length === 0 || password.length === 0 || !isValidEmail(email)) {
       setError("Please enter a valid user name");
       setTimeout(() => {
         setError(null)
       }, 1500);
       return
     }
-    if(newUserPassword.length === 0) {
-      setError("Please enter a valid password");
-      setTimeout(() => {
-        setError(null)
-      }, 1500);
-      return
-    }
-    if(newUserEmail.length === 0 || !isValidEmail(newUserEmail)) {
-      setError("Please enter a valid email");
-      setTimeout(() => {
-        setError(null)  
-      }, 1500);
-      return
-    }
-    
-    const {error} = await registerUser(newUserName, newUserPassword, newUserEmail);
+
+    const {error} = await registerUser(name, password, email);
 
     if(error) {
       error?.error ===  "Email already exist" ? setError(error.error) : setError("Something went wrong, please try again");
@@ -70,15 +56,37 @@ export default function NewUserForm(){
         <form onSubmit={handleCreateNewUser}>
           <label className='formulary__label'>
             <h3 className="formulary__title">Username:</h3>  
-            <input className="formulary__input" placeholder="Ex: Maria" type="text" value={newUserName} onChange={(e) => setNewUserName(e.target.value)} />
+            <input
+              name="name"
+              className="formulary__input"
+              placeholder="Ex: Maria"
+              type="text"
+              value={newUser.name}
+              onChange={(e) => handleChangeInput(e, setNewUser)}
+            />
           </label>
           <label className='formulary__label'>
             <h3 className="formulary__title">Email:</h3>  
-            <input className="formulary__input" placeholder="Ex: example@gmail.com" type="text" value={newUserEmail} onChange={(e) => setNewUserEmail(e.target.value)} />
+            <input
+              name='email'
+              className="formulary__input"
+              placeholder="Ex: example@gmail.com"
+              type="text"
+              value={newUser.email}
+              onChange={(e) => handleChangeInput(e, setNewUser)}
+            />
           </label>
           <label className='formulary__label'>
             <h3 className="formulary__title">Password:</h3>
-            <input className="formulary__input" placeholder="Ex: 1#ssf@" autoComplete="new-password" type="password" value={newUserPassword} onChange={(e) => setNewUserPassword(e.target.value)} />
+            <input
+              name='password'
+              className="formulary__input"
+              placeholder="Ex: 1#ssf@"
+              autoComplete="new-password"
+              type="password"
+              value={newUser.password}
+              onChange={(e) => handleChangeInput(e, setNewUser)}
+            />
           </label>
           <div className="newUser__buttons_container">
             <button className="formulary__button" type="submit">Register</button>
