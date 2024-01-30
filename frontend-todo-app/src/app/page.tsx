@@ -27,14 +27,14 @@ export default function Home() {
         login(data.token);
 
         router.push('/task-list');
+      } else {
+        setAlertComponent((prev: CustomAlertProps) => ({
+          ...prev,
+          open: true,
+          message: error,
+          type: 'error'
+        }));
       }
-      
-      setAlertComponent((prev: CustomAlertProps) => ({
-        ...prev,
-        open: true,
-        message: error,
-        type: 'error'
-      }));
       
     } catch (error: any) {      
       setAlertComponent((prev: CustomAlertProps) => ({

@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import { useState } from 'react';
+import CustomAlert, { defaultAlert } from '../../components/CustomAlert';
 import { editTask } from '../../services/tasksApi';
 import handleChangeInput from '../../utils/handleChangeInput';
-import CustomAlert from '../CustomAlert';
+import { isAnyFormInputsEmpty } from '../../utils/validateField';
 
 export default function EditTaskModal({
     editTaskModalOpen,
@@ -12,16 +13,18 @@ export default function EditTaskModal({
     token,
   } : EditTaskModalProps) {
   const [taskNewTitle, setTaskNewTitle] = useState<NewTaskProps>({title: ''});
-  const [error, setError] = useState<string | null>(null);
+  const [alertComponent, setAlertComponent] = useState<CustomAlertProps>(defaultAlert);
 
   const handleEditTask = async (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    if(taskNewTitle.title.length === 0){
-      setError('Please insert a new task title');
-      setTimeout(() => {
-        setError(null)
-      }, 1500);
+    if(isAnyFormInputsEmpty([taskNewTitle.title])){
+      setAlertComponent((prev: CustomAlertProps) => ({
+        ...prev,
+        open: true,
+        message: "Please insert a new task title",
+        type: 'error'
+      }));
       return
     }
 
@@ -31,18 +34,25 @@ export default function EditTaskModal({
       setEditTaskModalOpen(0)
       window.location.reload();
     } else {
-      setError('Something went wrong editing the task, please try again');
-      setTimeout(() => {
-        setError(null)
-      }, 1500);
-      
-      return
+      setAlertComponent((prev: CustomAlertProps) => ({
+        ...prev,
+        open: true,
+        message: "Something went wrong editing the task, please try again",
+        type: 'error'
+      }));
     }
   };
 
   return (
     <div className={`${editTaskModalOpen === taskId ? 'editTask__container_opened' : 'editTask__container'}`}>
-      {error && <CustomAlert message={error} type="error"/>}
+      {alertComponent.open && (
+        <CustomAlert
+          message={alertComponent.message}
+          type={alertComponent.type}
+          setAlertComponent={setAlertComponent}
+          open={alertComponent.open}
+        />
+      )}
       <form className="editTask__formulary" onSubmit={handleEditTask}>
         <label className="editTask__label">
           <h6>New title:</h6>

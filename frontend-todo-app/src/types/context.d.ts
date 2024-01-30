@@ -6,7 +6,3 @@ interface ContextProps {
   localStorageToken: string | null
   loadTasksError: string | null
 }
-
-interface ServerResponseProps {
-  
-}

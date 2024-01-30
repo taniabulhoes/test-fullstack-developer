@@ -10,13 +10,13 @@ export default function CreateNewTaskModal({
     setNewTaskModalOpen,
     token
   } : CreateNewTaskProps) {
-  const [newTaskTitle, setNewTaskTitle] = useState<string>('')
+  const [newTaskTitle, setNewTaskTitle] = useState<NewTaskProps>({title: ''})
   const [alertComponent, setAlertComponent] = useState<CustomAlertProps>(defaultAlert);
   
   async function handleCreateNewTask(e: React.SyntheticEvent) {
     e.preventDefault();
 
-    if (isAnyFormInputsEmpty([newTaskTitle])) {
+    if (isAnyFormInputsEmpty([newTaskTitle.title])) {
       setAlertComponent((prev: CustomAlertProps) => ({
         ...prev,
         open: true,
@@ -26,7 +26,7 @@ export default function CreateNewTaskModal({
       return setNewTaskModalOpen(true)
     }
 
-    await createTask(userId, newTaskTitle, token )
+    await createTask(userId, newTaskTitle.title, token )
     setNewTaskModalOpen(false)
     window.location.reload();
   }
@@ -49,7 +49,7 @@ export default function CreateNewTaskModal({
             name='title'
             placeholder='Type a new task'
             type="text"
-            value={newTaskTitle}
+            value={newTaskTitle.title}
             onChange={(e) => handleChangeInput(e, setNewTaskTitle)}
           />
         </label>
