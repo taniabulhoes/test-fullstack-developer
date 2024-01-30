@@ -9,7 +9,7 @@ class UserController {
       const emailExist = await UserModel.getUserByEmail(userEmail);
 
       if (emailExist) {
-        res.status(403).json({ error: 'Email already exist' });
+        res.status(403).json({ error: 'Email already exists' });
         return;
       }
 
@@ -25,12 +25,11 @@ class UserController {
 
   static async loginUser(req, res) {
     const { userEmail, password } = req.body;
-    
     try {
       const user = await UserModel.getUserByEmail(userEmail);
 
       if (!user || user.password !== password) {
-        res.status(401).json({ error: 'Invalid credentials' });
+        res.status(401).json({ error: 'Wrong e-mail or password, please try again' });
         return;
       }
 
@@ -38,6 +37,7 @@ class UserController {
 
       res.status(200).json({ message: 'Login successful', token });
     } catch (error) {
+      //TODO: handle error
       console.error('Error logging in:', error.message);
       res.status(500).json({ error: error.message });
     }
