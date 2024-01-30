@@ -3,15 +3,15 @@ import axios from 'axios';
 const loginUser = async (email, password) => {  
   try {
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users/login`, { userEmail: email, password });
-
+    // throw new Error();
     if (response.status === 200) {
       return { success: true, data: response.data };
     } else {
-      return { success: false, error: response.data.error || 'Login failed' };
+      return { success: false, error: response.data.error || 'Login failed, please try again' };
     }
   } catch (error) {
     console.error('Error during login:', error);
-    return { success: false, error: 'Internal Server Error' };
+    return { success: false, error: error.response.data.error };
   }
 };
 
