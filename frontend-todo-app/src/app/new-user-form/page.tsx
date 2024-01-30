@@ -2,56 +2,74 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import CustomAlert from '../../components/CustomAlert';
+import CustomAlert, { defaultAlert } from '../../components/CustomAlert';
 import { registerUser } from '../../services/userApi';
 import handleChangeInput from '../../utils/handleChangeInput';
+import { isAnyFormInputsEmpty, isValidEmail } from '../../utils/validateField';
 
 export default function NewUserForm(){
   const router = useRouter();
   const [newUser, setNewUser] = useState({name: '', email: '', password: ''})
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
+  const [alertComponent, setAlertComponent] = useState<CustomAlertProps>(defaultAlert);
 
   async function handleCreateNewUser(e: React.SyntheticEvent) {
     e.preventDefault();
+
     const {name, email, password} = newUser;
 
-    if(name.length === 0 || email.length === 0 || password.length === 0 || !isValidEmail(email)) {
-      setError("Please enter a valid user name");
-      setTimeout(() => {
-        setError(null)
-      }, 1500);
-      return
-    }
+    try {
+      if(!isValidEmail(email) || isAnyFormInputsEmpty([email, password, name])) {
+        setAlertComponent((prev: CustomAlertProps) => ({
+          ...prev,
+          open: true,
+          message: "Please enter a valid field",
+          type: 'error'
+        }));
 
-    const {error} = await registerUser(name, password, email);
+        return;
+      }
+       
+      const { success, error } = await registerUser(name, password, email);
 
-    if(error) {
-      error?.error ===  "Email already exist" ? setError(error.error) : setError("Something went wrong, please try again");
-      setTimeout(() => {
-        setError(null)  
-      }, 1500);
-      return
-    }
+      if(success) {
+        setAlertComponent((prev: CustomAlertProps) => ({
+          ...prev,
+          open: true,
+          message: "You have been regisregistered successfully, please login",
+          type: 'success'
+        }));
+    
+        return router.push("/");
+      }
 
-    setSuccess("You have been regisregistered successfully, please login");
-    setTimeout(() => {
-      setSuccess(null);
-      router.push("/");
-    }, 1500);
+      setAlertComponent((prev: CustomAlertProps) => ({
+        ...prev,
+        open: true,
+        message: error,
+        type: 'error'
+      }));
 
-  }
-
-  function isValidEmail(email: string): boolean {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(email);
+    } catch (error: any) {
+      setAlertComponent((prev: CustomAlertProps) => ({
+        ...prev,
+        open: true,
+        message: error,
+        type: 'error'
+      }));
+    }    
   }
 
   return (
     <>
       <main className="formulary__container">
-        {error && <CustomAlert message={error} type="error"/> }
-        {success && <CustomAlert message={success} type="success"/>}
+        {alertComponent.open && (
+          <CustomAlert
+            message={alertComponent.message}
+            type={alertComponent.type}
+            setAlertComponent={setAlertComponent}
+            open={alertComponent.open}
+          />
+        )}
         <h1 className="formulary__container_title">Sign Up</h1>
         <form onSubmit={handleCreateNewUser}>
           <label className='formulary__label'>

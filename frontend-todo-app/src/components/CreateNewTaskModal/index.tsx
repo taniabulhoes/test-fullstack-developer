@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import CustomAlert, { defaultAlert } from '../../components/CustomAlert';
 import { createTask } from '../../services/tasksApi';
 import handleChangeInput from '../../utils/handleChangeInput';
-import CustomAlert from '../CustomAlert';
+import { isAnyFormInputsEmpty } from '../../utils/validateField';
 
 export default function CreateNewTaskModal({
     userId,
@@ -9,28 +10,37 @@ export default function CreateNewTaskModal({
     setNewTaskModalOpen,
     token
   } : CreateNewTaskProps) {
-  const [newTaskTitle, setNewTaskTitle] = useState<NewTaskProps>({title: ''})
-  const [error, setError] = useState<string | null>(null);
+  const [newTaskTitle, setNewTaskTitle] = useState<string>('')
+  const [alertComponent, setAlertComponent] = useState<CustomAlertProps>(defaultAlert);
   
   async function handleCreateNewTask(e: React.SyntheticEvent) {
     e.preventDefault();
 
-    if (newTaskTitle.title.length === 0) {
-      setError('Please insert a new task title');
-      setTimeout(() => {
-        setError(null)
-      }, 1500);
+    if (isAnyFormInputsEmpty([newTaskTitle])) {
+      setAlertComponent((prev: CustomAlertProps) => ({
+        ...prev,
+        open: true,
+        message: "Please insert a new task title",
+        type: 'error'
+      }));
       return setNewTaskModalOpen(true)
     }
 
-    await createTask(userId, newTaskTitle.title, token )
+    await createTask(userId, newTaskTitle, token )
     setNewTaskModalOpen(false)
     window.location.reload();
   }
   
   return (
     <main className={`${newTaskModalOpen ? 'newTask__container_opened' : 'newTask__container'} formulary__container`}>
-      {error && <CustomAlert message={error} type="error"/> }
+      {alertComponent.open && (
+        <CustomAlert
+          message={alertComponent.message}
+          type={alertComponent.type}
+          setAlertComponent={setAlertComponent}
+          open={alertComponent.open}
+        />
+      )}
       <h1 className="formulary__container_title">Create a new task</h1>
       <form className="formulary" onSubmit={handleCreateNewTask}>
         <label className="formulary__label">
@@ -39,7 +49,7 @@ export default function CreateNewTaskModal({
             name='title'
             placeholder='Type a new task'
             type="text"
-            value={newTaskTitle.title}
+            value={newTaskTitle}
             onChange={(e) => handleChangeInput(e, setNewTaskTitle)}
           />
         </label>

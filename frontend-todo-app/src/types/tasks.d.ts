@@ -3,7 +3,3 @@ interface TasksProps {
   title: string
   user_id: number
 }
-
-type NewTaskProps = {
-  title: string
-}

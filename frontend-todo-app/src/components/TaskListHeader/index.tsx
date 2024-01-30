@@ -1,17 +1,19 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import useAuth from '../../context';
 import CreateNewTaskModal from '../CreateNewTaskModal';
 
 export default function TaskListHeader({
   userId,
-  newTaskModalOpen,
-  setNewTaskModalOpen,
   token
 
 } : HeaderProps) {
+  const [newTaskModalOpen, setNewTaskModalOpen] = useState<boolean>(false)
+  
   const router = useRouter();
   const { logout } = useAuth();
+  
   
   function handleLogout(e: React.SyntheticEvent) {
     e.preventDefault();
@@ -19,8 +21,6 @@ export default function TaskListHeader({
     router.push('/');
     logout()
   }
-
-
 
   return (
     <>

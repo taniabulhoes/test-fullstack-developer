@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import CustomAlert from '../../components/CustomAlert';
+import CustomAlert, { defaultAlert } from '../../components/CustomAlert';
 import EditTaskModal from '../../components/EditTaskModal';
 import PrivateRoute from '../../components/PrivateRoute';
 import TaskListHeader from '../../components/TaskListHeader';
@@ -12,9 +12,8 @@ import { deleteTask } from '../../services/tasksApi.js';
 export default function TaskList() {
   const { tasks, localStorageToken, user } = useAuth();
   const [editTaskModalOpen, setEditTaskModalOpen] = useState<number>(0)
-  const [newTaskModalOpen, setNewTaskModalOpen] = useState<boolean>(false)
-  const [alert, setAlert] = useState<string | null>(null);
-  const [alertType, setAlertType] = useState<string | null>(null);
+  // const [newTaskModalOpen, setNewTaskModalOpen] = useState<boolean>(false)
+  const [alertComponent, setAlertComponent] = useState<CustomAlertProps>(defaultAlert);
   const [searchTitle, setSearchTitle] = useState<string>('');
   const filteredTasks = tasks?.filter(task =>
     task.title.toLowerCase().includes(searchTitle.toLowerCase())
@@ -24,20 +23,21 @@ export default function TaskList() {
     const {success} = await deleteTask(taskId, userId, token);
 
     if (success) {
-      setAlert("Your task has been deleted nsucessfully")
-      setAlertType("success")
-      setTimeout(() => {
-        setAlert(null)
-        setAlertType(null)
-      }, 1500);
-    } else {
-      setAlert("Something went wrong deleting the task, please try again")
-      setAlertType("error")
+      setAlertComponent((prev: CustomAlertProps) => ({
+        ...prev,
+        open: true,
+        message: "Your task has been deleted nsucessfully",
+        type: 'success'
 
-      setTimeout(() => {
-        setAlert(null)
-        setAlertType(null)
-      }, 1500);
+      }));
+    } else {
+        setAlertComponent((prev: CustomAlertProps) => ({
+          ...prev,
+          open: true,
+          message: "Something went wrong deleting the task, please try again",
+          type: 'error'
+
+        }));
     }
 
     window.location.reload();
@@ -56,11 +56,16 @@ export default function TaskList() {
     <PrivateRoute>
       {localStorageToken &&
         <main className="formulary__container">
-          {alert && alertType && <CustomAlert message={alert} type={alertType}/> }
+          {alertComponent.open && (
+            <CustomAlert 
+              message={alertComponent.message}
+              type={alertComponent.type}
+              setAlertComponent={setAlertComponent}
+              open={alertComponent.open}
+            />)
+          }
           <TaskListHeader 
             userId={user?.id}
-            newTaskModalOpen={newTaskModalOpen}
-            setNewTaskModalOpen={setNewTaskModalOpen}
             token={localStorageToken}
           />
           <div className='taskList__searchTasks_container'>
