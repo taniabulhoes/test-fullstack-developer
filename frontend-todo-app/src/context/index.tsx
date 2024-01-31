@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from 'react';
-import { userTasks } from '../services/tasksApi.js';
+import { userTasks } from '../services/tasksApi';
 
 const AppContext = createContext<ContextProps | undefined>(undefined);
 

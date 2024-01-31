@@ -7,12 +7,11 @@ import EditTaskModal from '../../components/EditTaskModal';
 import PrivateRoute from '../../components/PrivateRoute';
 import TaskListHeader from '../../components/TaskListHeader';
 import useAuth from '../../context';
-import { deleteTask } from '../../services/tasksApi.js';
+import { deleteTask } from '../../services/tasksApi';
 
 export default function TaskList() {
   const { tasks, localStorageToken, user } = useAuth();
   const [editTaskModalOpen, setEditTaskModalOpen] = useState<number>(0)
-  // const [newTaskModalOpen, setNewTaskModalOpen] = useState<boolean>(false)
   const [alertComponent, setAlertComponent] = useState<CustomAlertProps>(defaultAlert);
   const [searchTitle, setSearchTitle] = useState<string>('');
   const filteredTasks = tasks?.filter(task =>
