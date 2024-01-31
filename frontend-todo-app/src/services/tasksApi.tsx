@@ -11,7 +11,7 @@ export const userTasks = async (userId: number, token: string) => {
   return makeRequest(config);
 };
 
-export const createTask = async (userId: number, title: string, token: string) => {
+export const createTask = async (userId: number | undefined, title: string, token: string | undefined) => {  
   const config = {
     method: 'post',
     url: `${process.env.NEXT_PUBLIC_API_URL}/tasks/create`,

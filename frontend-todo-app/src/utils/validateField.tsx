@@ -4,5 +4,5 @@ export function isValidEmail(email: string): boolean {
 }
 
 export function isAnyFormInputsEmpty(inputValue: any[]): boolean {
-  return inputValue.some(input => !input || input.length === 0);
+  return inputValue.some(input => !input || input.length === 0 || input === undefined);
 }
