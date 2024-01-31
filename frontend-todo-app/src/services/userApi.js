@@ -10,9 +10,9 @@ const loginUser = async (email, password) => {
       return { success: false, error: response.data.error || 'Login failed, please try again' };
     }
   } catch (error) {
-    //TODO: handle error
+    //TODO: handle error improvement
     console.error('Error during login:', error);
-    return { success: false, error: error.response.data.error };
+    return { success: false, error: error.response.data };
   }
 };
 
