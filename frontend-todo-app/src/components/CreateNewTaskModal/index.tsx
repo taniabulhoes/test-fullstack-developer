@@ -26,9 +26,20 @@ export default function CreateNewTaskModal({
       return setNewTaskModalOpen(true)
     }
 
-    await createTask(userId, newTaskTitle.title, token )
-    setNewTaskModalOpen(false)
-    window.location.reload();
+    try {
+      await createTask(userId, newTaskTitle.title, token );
+      setNewTaskModalOpen(false)
+      window.location.reload();
+      
+    } catch (error) {
+      setAlertComponent((prev: CustomAlertProps) => ({
+        ...prev,
+        open: true,
+        message: "Something went wrong, please try again",
+        type: 'error'
+      }));
+      return setNewTaskModalOpen(true)
+    }
   }
   
   return (

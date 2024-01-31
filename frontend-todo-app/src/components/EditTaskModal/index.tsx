@@ -28,12 +28,11 @@ export default function EditTaskModal({
       return
     }
 
-    const { success } = await editTask(taskId, taskNewTitle.title, userId, token);
-
-    if (success) {
+    try {
+      await editTask(taskId, taskNewTitle.title, userId, token);
       setEditTaskModalOpen(0)
       window.location.reload();
-    } else {
+    } catch (error) {
       setAlertComponent((prev: CustomAlertProps) => ({
         ...prev,
         open: true,
